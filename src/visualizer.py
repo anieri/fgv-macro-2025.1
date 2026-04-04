@@ -128,44 +128,46 @@ class MacroVisualizer:
         plt.close()
 
     def plot_ad_bt_eru_theoretical(self, model, filename='ad_bt_eru_teorico.png'):
-        """Gera o diagrama AD-BT-ERU em 3 painéis para facilitar a interpretação."""
+        """Gera o diagrama AD-BT-ERU com eixo duplo para legibilidade das curvas BT e ERU."""
         y_range = np.linspace(model.y_e - 15, model.y_e + 15, 100)
         eru = model.get_eru_curve(y_range)
         bt = model.get_bt_curve(y_range)
         ad = model.get_ad_curve(y_range)
 
-        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6), sharey=True)
+        fig, ax1 = plt.subplots(figsize=(10, 8))
         
-        # Painel 1: Equilíbrio de Médio Prazo (ERU + BT)
-        ax1.plot(y_range, eru, label='ERU (Oferta)', color='red', lw=2.5)
-        ax1.plot(y_range, bt, label='BT (Equilíbrio Externo)', color='blue', lw=2)
-        ax1.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
-        ax1.set_title("1. Equilíbrio de Médio Prazo", fontsize=12, fontweight='bold')
-        ax1.set_ylabel('Taxa de Câmbio Real (q)')
+        # Eixo Esquerdo: Curva AD (Maior Range/Escala Geral)
+        ax1.plot(y_range, ad, color='green', lw=3, label='AD (Demanda)')
         ax1.set_xlabel('Produto (y)')
-        ax1.legend()
-
-        # Painel 2: Demanda e Balança Comercial (AD + BT)
-        ax2.plot(y_range, bt, label='BT', color='blue', lw=2)
-        ax2.plot(y_range, ad, label='AD (Demanda)', color='green', lw=2)
-        ax2.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
-        ax2.set_title("2. Choques de Demanda", fontsize=12, fontweight='bold')
-        ax2.set_xlabel('Produto (y)')
-        ax2.legend()
-
-        # Painel 3: Modelo Integrado Completo
-        ax3.plot(y_range, eru, label='ERU', color='red', lw=2)
-        ax3.plot(y_range, bt, label='BT', color='blue', lw=2)
-        ax3.plot(y_range, ad, label='AD', color='green', lw=2)
-        ax3.scatter([model.y_e], [model.q_bar], color='black', zorder=5, label='Equilíbrio Final')
-        ax3.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
-        ax3.set_title("3. Equilíbrio Geral", fontsize=12, fontweight='bold')
-        ax3.set_xlabel('Produto (y)')
-        ax3.legend()
-
-        plt.suptitle("Economia Aberta: Modelo AD-BT-ERU (Carlin & Soskice)", fontsize=16, fontweight='bold', y=1.05)
-        self._add_source(ax3, "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
+        ax1.set_ylabel('Câmbio Real (q) - Escala AD', color='green', fontweight='bold')
+        ax1.tick_params(axis='y', labelcolor='green')
         
-        plt.tight_layout()
-        plt.savefig(f"{self.output_dir}/{filename}", bbox_inches='tight')
+        # Eixo Direito: Zoom nas curvas BT e ERU
+        ax2 = ax1.twinx()
+        ax2.plot(y_range, bt, color='blue', lw=2.5, linestyle='-', label='BT')
+        ax2.plot(y_range, eru, color='red', lw=2.5, linestyle='-', label='ERU')
+        ax2.set_ylabel('Câmbio Real (q) - Escala BT e ERU', color='blue', fontweight='bold')
+        ax2.tick_params(axis='y', labelcolor='blue')
+
+        # Centralizar ambos os eixos no q_bar
+        # Range amplo para AD
+        ax1.set_ylim(model.q_bar - 5, model.q_bar + 5)
+        # Range menor (zoom) para BT/ERU conforme pedido (perto de 1)
+        ax2.set_ylim(model.q_bar - 1, model.q_bar + 1)
+
+        # Adicionar linhas de referência
+        ax1.axvline(model.y_e, color='black', linestyle='--', alpha=0.3, label='y_e')
+        ax1.axhline(model.q_bar, color='gray', linestyle=':', alpha=0.3)
+        
+        # Rótulos diretos para facilitar leitura
+        ax1.text(y_range[-1], ad[-1], ' AD', color='green', fontweight='bold', va='center')
+        ax2.text(y_range[-1], bt[-1], ' BT', color='blue', fontweight='bold', va='center')
+        ax2.text(y_range[-1], eru[-1], ' ERU', color='red', fontweight='bold', va='center')
+
+        plt.title('Modelo AD-BT-ERU: Equilíbrio de Economia Aberta', fontsize=15, fontweight='bold', pad=20)
+        self._add_source(ax1, "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
+        
+        fig.tight_layout()
+        plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
+

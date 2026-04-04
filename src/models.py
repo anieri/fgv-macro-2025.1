@@ -33,24 +33,22 @@ class ISPCMR(MacroModel):
 
 class ADBTERU(MacroModel):
     """Modelo AD-BT-ERU para Economia Aberta."""
-    def __init__(self, y_e=100, q_bar=1.0, theta=0.1, phi=0.05, **kwargs):
+    def __init__(self, y_e=100, q_bar=1.0, theta=0.3, phi=0.5, gamma=0.3, **kwargs):
         super().__init__(**kwargs)
         self.q_bar = q_bar  # Taxa de câmbio real de equilíbrio
         self.theta = theta  # Sensibilidade da Balança Comercial
-        self.phi = phi      # Sensibilidade da Demanda Agregada ao câmbio
+        self.phi = phi      # Sensibilidade da Demanda Agregada ao câmbio (Inclinação AD)
+        self.gamma = gamma  # Sensibilidade da ERU
 
     def get_eru_curve(self, y_range):
         """Curva ERU (Equilibrium Real Wage) - Inclinada negativamente."""
-        # q = q_bar - gamma * (y - y_e)
-        gamma = 0.08
-        return self.q_bar - gamma * (y_range - self.y_e)
+        return self.q_bar - self.gamma * (y_range - self.y_e) / 10
 
     def get_bt_curve(self, y_range):
         """Curva BT (Balance of Trade)."""
-        # q = q_bar + theta * (y - y_e)
-        return self.q_bar + self.theta * (y_range - self.y_e)
+        return self.q_bar + self.theta * (y_range - self.y_e) / 10
 
     def get_ad_curve(self, y_range):
         """Curva AD (Aggregate Demand) em termos de q e y."""
-        # q = q_bar + (y - y_e) / phi (Simplificado para visualização)
-        return self.q_bar + (y_range - self.y_e) / self.phi
+        # q = q_bar + (y - y_e) / phi
+        return self.q_bar + (y_range - self.y_e) / (self.phi * 10)
