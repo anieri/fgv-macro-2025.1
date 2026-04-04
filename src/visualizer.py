@@ -128,25 +128,44 @@ class MacroVisualizer:
         plt.close()
 
     def plot_ad_bt_eru_theoretical(self, model, filename='ad_bt_eru_teorico.png'):
-        """Gera o diagrama AD-BT-ERU com ERU inclinada negativamente."""
+        """Gera o diagrama AD-BT-ERU em 3 painéis para facilitar a interpretação."""
         y_range = np.linspace(model.y_e - 15, model.y_e + 15, 100)
         eru = model.get_eru_curve(y_range)
         bt = model.get_bt_curve(y_range)
         ad = model.get_ad_curve(y_range)
 
-        plt.figure(figsize=(10, 8))
-        plt.plot(y_range, eru, label='ERU (Equilíbrio Salário Real)', color='red', lw=2.5)
-        plt.plot(y_range, bt, label='BT (Balança Comercial = 0)', color='blue', lw=2)
-        plt.plot(y_range, ad, label='AD (Demanda Agregada)', color='green', lw=2)
+        fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(18, 6), sharey=True)
         
-        plt.axvline(model.y_e, color='black', linestyle='--', alpha=0.3, label='y_e (Produto de Equilíbrio)')
-        plt.axhline(model.q_bar, color='gray', linestyle=':', alpha=0.3)
+        # Painel 1: Equilíbrio de Médio Prazo (ERU + BT)
+        ax1.plot(y_range, eru, label='ERU (Oferta)', color='red', lw=2.5)
+        ax1.plot(y_range, bt, label='BT (Equilíbrio Externo)', color='blue', lw=2)
+        ax1.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
+        ax1.set_title("1. Equilíbrio de Médio Prazo", fontsize=12, fontweight='bold')
+        ax1.set_ylabel('Taxa de Câmbio Real (q)')
+        ax1.set_xlabel('Produto (y)')
+        ax1.legend()
+
+        # Painel 2: Demanda e Balança Comercial (AD + BT)
+        ax2.plot(y_range, bt, label='BT', color='blue', lw=2)
+        ax2.plot(y_range, ad, label='AD (Demanda)', color='green', lw=2)
+        ax2.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
+        ax2.set_title("2. Choques de Demanda", fontsize=12, fontweight='bold')
+        ax2.set_xlabel('Produto (y)')
+        ax2.legend()
+
+        # Painel 3: Modelo Integrado Completo
+        ax3.plot(y_range, eru, label='ERU', color='red', lw=2)
+        ax3.plot(y_range, bt, label='BT', color='blue', lw=2)
+        ax3.plot(y_range, ad, label='AD', color='green', lw=2)
+        ax3.scatter([model.y_e], [model.q_bar], color='black', zorder=5, label='Equilíbrio Final')
+        ax3.axvline(model.y_e, color='black', linestyle='--', alpha=0.3)
+        ax3.set_title("3. Equilíbrio Geral", fontsize=12, fontweight='bold')
+        ax3.set_xlabel('Produto (y)')
+        ax3.legend()
+
+        plt.suptitle("Economia Aberta: Modelo AD-BT-ERU (Carlin & Soskice)", fontsize=16, fontweight='bold', y=1.05)
+        self._add_source(ax3, "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
         
-        plt.xlabel('Produto (y)')
-        plt.ylabel('Taxa de Câmbio Real (q)')
-        plt.title('Economia Aberta: AD-BT-ERU (Carlin & Soskice)', fontsize=14)
-        plt.legend()
-        self._add_source(plt.gca(), "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
-        
-        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.tight_layout()
+        plt.savefig(f"{self.output_dir}/{filename}", bbox_inches='tight')
         plt.close()
