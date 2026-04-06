@@ -9,15 +9,28 @@ from src.visualizer import MacroVisualizer
 def calculate_output_gap(df):
     """Calcula o Hiato do Produto usando o Filtro HP."""
     if 'Real_GDP_Q' in df.columns:
-        # Fills NaNs temporarily for the filter, then takes quarterly points
         gdp = df['Real_GDP_Q'].dropna()
         if len(gdp) > 20:
-            # lambda = 1600 para dados trimestrais
             cycle, trend = hpfilter(np.log(gdp), lamb=1600)
-            # Hiato = (y - y_trend) / y_trend * 100
             gap = (np.exp(cycle) - 1) * 100
             return pd.Series(gap, index=gdp.index)
     return pd.Series(dtype=float)
+
+def calculate_derived_variables(df):
+    """Calcula variáveis derivadas (Juros Real, Câmbio Real, etc.)."""
+    # 1. Taxa de Juros Real (i - pi)
+    if 'Policy_Rate' in df.columns and 'CPI_YoY' in df.columns:
+        df['Real_Interest_Rate'] = df['Policy_Rate'] - df['CPI_YoY']
+    
+    # 2. Taxa de Câmbio Real (q = E * P_us / P_kor)
+    if 'Exchange_Rate' in df.columns and 'CPI_Index_USA' in df.columns and 'CPI_Index_KOR' in df.columns:
+        # Normalizamos os índices de preço se necessário, mas a razão E * P*/P já define q.
+        # Costuma-se indexar q para facilitar a visualização (ex: base 100 em certa data).
+        q = df['Exchange_Rate'] * (df['CPI_Index_USA'] / df['CPI_Index_KOR'])
+        # Normalizar para q=1 no início da série para facilitar visualização de depreciação/apreciação
+        df['Real_Exchange_Rate'] = q / q.dropna().iloc[0]
+    
+    return df
 
 def run_analysis():
     print("Iniciando Análise Macroeconômica da Coreia do Sul (1960-2024)...")
@@ -29,11 +42,15 @@ def run_analysis():
     if not os.path.exists(data_file):
         df = loader.get_full_dataset()
     else:
-        df = pd.read_csv(data_file, index_col=0, parse_dates=True)
+        # We re-run loader.get_full_dataset() if we need new columns, 
+        # but for safety I'll let the user decide. 
+        # Actually I'll force refresh since I just added new columns.
+        df = loader.get_full_dataset()
     
-    # 2. Calcular Hiato do Produto
-    print("Calculando Hiato do Produto (Filtro HP)...")
+    # 2. Calcular Variáveis
+    print("Calculando Variáveis Derivadas...")
     df['Output_Gap'] = calculate_output_gap(df)
+    df = calculate_derived_variables(df)
     
     # 3. Inicializar Visualizador
     visualizer = MacroVisualizer(output_dir='plots/pt-br')
@@ -51,18 +68,25 @@ def run_analysis():
         print(f"Gerando dashboards para: {label}...")
         df_period = df.loc[start:end]
         
-        # Dashboard de Demanda
+        # Dashboard de Demanda (C, I, G, X, M)
+        # Note: Exports_M and Imports_M are monthly, while others are quarterly/annual.
+        # We plot what we have.
         visualizer.plot_time_series(
-            df_period, ['Consumption_Q', 'Investment_Q', 'Gov_Spending_Q'],
+            df_period, ['Consumption_Q', 'Investment_Q', 'Gov_Spending_Q', 'Exports_M', 'Imports_M'],
             f"Componentes da Demanda ({label})", "Valor", 
             f"{key}_demanda.png", source="FRED", period_label=label
         )
         
-        # Dashboard Monetário e Hiato
-        visualizer.plot_time_series(
-            df_period, ['CPI_YoY', 'Output_Gap'],
-            f"Inflação e Hiato do Produto ({label})", "Percentual (%)", 
-            f"{key}_hiato_inflacao.png", source="FRED e Cálculos Próprios", period_label=label
+        # Dashboard Monetário (Nova Versão)
+        visualizer.plot_monetary_policy(
+            df_period, f"Política Monetária e Hiato ({label})", 
+            f"{key}_monetario.png", source="FRED e Cálculos Próprios", period_label=label
+        )
+
+        # Dashboard de Desequilíbrios (Dívida e Externo)
+        visualizer.plot_macro_imbalances(
+            df_period, f"Desequilíbrios Macroeconômicos ({label})",
+            f"{key}_desequilibrios.png", source="Banco Mundial (WDI)", period_label=label
         )
 
         # Dashboard de Oferta (Setorial)
@@ -100,10 +124,6 @@ def run_analysis():
 
     print("\nProcesso Concluído com Sucesso!")
     print(f"Todos os gráficos salvos em: {os.path.abspath(visualizer.output_dir)}")
-
-if __name__ == "__main__":
-    run_analysis()
-
 
 if __name__ == "__main__":
     run_analysis()

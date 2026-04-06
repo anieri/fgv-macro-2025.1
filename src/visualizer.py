@@ -76,6 +76,58 @@ class MacroVisualizer:
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
+    def plot_monetary_policy(self, df, title, filename, source="FRED", period_label=None):
+        """Gráfico especializado para Política Monetária: Inflação, Juros e Hiato."""
+        fig, ax = plt.subplots(figsize=(12, 6))
+        
+        plt.axhline(0, color='black', linestyle='-', linewidth=1.2, alpha=0.5)
+        
+        cols = ['CPI_YoY', 'Policy_Rate', 'Real_Interest_Rate', 'Output_Gap']
+        for col in cols:
+            if col in df.columns:
+                valid_data = df[col].dropna()
+                if not valid_data.empty:
+                    ax.plot(valid_data.index, valid_data.values, label=self._translate_col(col), 
+                             linewidth=2.5 if 'Real' in col else 1.5,
+                             linestyle='--' if 'Gap' in col else '-')
+
+        ax.set_title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
+        ax.set_ylabel("Percentual (%)")
+        ax.set_xlabel("Ano")
+        ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
+        self._add_source(ax, f"Fonte: {source}")
+        
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+            
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
+    def plot_macro_imbalances(self, df, title, filename, source="Banco Mundial (WDI)", period_label=None):
+        """Gráfico especializado para Desequilíbrios: Dívida e Conta Corrente."""
+        fig, ax = plt.subplots(figsize=(12, 6))
+        plt.axhline(0, color='black', linestyle='-', linewidth=1.2, alpha=0.5)
+
+        cols = ['Gov_Debt_GDP', 'Current_Account_GDP', 'Private_Credit_GDP']
+        for col in cols:
+            if col in df.columns:
+                valid_data = df[col].dropna()
+                if not valid_data.empty:
+                    ax.plot(valid_data.index, valid_data.values, label=self._translate_col(col), 
+                             marker='o', markersize=4)
+
+        ax.set_title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
+        ax.set_ylabel("Percentual do PIB (%)")
+        ax.set_xlabel("Ano")
+        ax.legend()
+        self._add_source(ax, f"Fonte: {source}")
+        
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+            
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
     def _translate_col(self, col):
         translations = {
             'CPI_YoY': 'Inflação (YoY %)',
@@ -95,7 +147,12 @@ class MacroVisualizer:
             'Total_Health_Exp_GDP': 'Gasto Total Saúde (% PIB)',
             'CPI_Health': 'Inflação Saúde (YoY)',
             'Retail_Sales': 'Vendas no Varejo (Proxy C)',
-            'Gov_Debt_GDP': 'Dívida Pública (% PIB)'
+            'Gov_Debt_GDP': 'Dívida Pública (% PIB)',
+            'Real_Interest_Rate': 'Taxa de Juros Real (%)',
+            'Policy_Rate': 'Taxa de Juros Nominal (%)',
+            'Current_Account_GDP': 'Balanço de Conta Corrente (% PIB)',
+            'Private_Credit_GDP': 'Crédito ao Setor Privado (% PIB)',
+            'Real_Exchange_Rate': 'Câmbio Real (q)'
         }
         return translations.get(col, col)
 

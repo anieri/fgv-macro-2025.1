@@ -24,6 +24,8 @@ class SocioEconomicDataLoader:
             'Policy_Rate': 'INTDSRKRM193N',
             'Retail_Sales': 'KORSLRTTO01IXOBM',
             'CPI_Health': 'KORCP060000GYM',
+            'CPI_Index_KOR': 'KORCPIALLMINMEI',
+            'CPI_Index_USA': 'USACPIALLMINMEI',
             # Quarterly
             'Real_GDP_Q': 'NGDPRSAXDCKRQ',
             'Consumption_Q': 'NAEXKP02KRQ189S',
@@ -52,7 +54,9 @@ class SocioEconomicDataLoader:
             'Public_Health_Exp_GDP': 'SH.XPD.GHED.GD.ZS',
             'Private_Health_Exp_Total': 'SH.XPD.PVTD.CH.ZS',
             'Total_Health_Exp_GDP': 'SH.XPD.CHEX.GD.ZS',
-            'Gov_Debt_GDP': 'GC.DOD.TOTL.GD.ZS'
+            'Gov_Debt_GDP': 'GC.DOD.TOTL.GD.ZS',
+            'Current_Account_GDP': 'BN.CAB.XOKA.GD.ZS',
+            'Private_Credit_GDP': 'FS.AST.PRVT.GD.ZS'
         }
         
         try:

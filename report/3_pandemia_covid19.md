@@ -1,57 +1,35 @@
-# Relatório 3: A Pandemia COVID-19, Saúde e a Transição Tecnológica (2019-2024)
+# Relatório 3: A Pandemia COVID-19 e a Resiliência Tecnológica (2019-2024)
 
 ## 1. Contexto e o Choque Misto
-A pandemia de COVID-19 representou um desafio macroeconômico inédito para a Coreia do Sul, combinando uma paralisia temporária da demanda doméstica com rupturas severas nas cadeias de suprimentos globais. Diferente das crises anteriores, a resposta exigiu uma integração total entre política sanitária e econômica.
+A pandemia de COVID-19 trouxe um choque simultâneo de oferta (cadeias de suprimento) e demanda (consumo doméstico paralisado). A Coreia do Sul destacou-se por não adotar *lockdowns* totais, preservando a produção industrial.
 
-### Evidências dos Dados
-*   **Choque na IS:** No 1º tri de 2020, o consumo das famílias caiu de **225 trilhões** para **211 trilhões de Won**, conforme visto no gráfico `3. Pandemia_demanda.png`.
-*   **Inflação de Custos:** Após um período de deflação iminente em 2020, o CPI YoY saltou para **6,3% em julho de 2022**, impulsionado por energia e insumos médicos (verificados na série `CPI_Health`).
-*   **Esforço em Saúde:** Os gastos públicos com saúde (`Public_Health_Exp_GDP`) atingiram o patamar recorde de **8,8% do PIB** em 2022.
+## 2. Impactos Econômicos (Item 3)
 
-## 2. Análise Teórica (Carlin & Soskice)
+### Lado da Demanda e Oferta
+*   **Consumo (C):** O consumo das famílias caiu de forma inédita no 1º tri de 2020.
+*   **Exportações (X):** Após um breve choque, as exportações saltaram em 2021-2022 devido à explosão da demanda global por semicondutores e produtos eletrônicos.
+*   **Inflação:** Manteve-se baixa em 2020, mas subiu para **6,3% em 2022** devido ao choque de custos globais (energia e alimentos).
 
-### O Modelo IS-PC-MR
-*   **Choque Duplo:** A pandemia deslocou a curva **IS para a esquerda** (incerteza) e a curva **PC para cima** (choque de oferta de insumos).
-*   **Estabilização Fiscal:** Os pagamentos de auxílio (Relief Payments) e os quatro orçamentos suplementares em 2020 atuaram como um **deslocamento forçado da IS para a direita**, impedindo uma queda desastrosa do produto.
-*   **Compromisso com a Meta (MR):** O Banco da Coreia (BoK) reduziu os juros para a mínima histórica de **0,25%**, mas iniciou uma subida rigorosa a partir de 2022 para reancorar as expectativas na MR frente ao choque inflacionário global.
+### Desequilíbrios Macroeconômicos e Fatores Financeiros
+*   **Dívida Pública:** Houve um salto significativo na dívida do governo, de **37,7% (2019)** para **48,5% (2023)** do PIB, refletindo os pacotes de auxílio.
+*   **Dívida Privada:** O endividamento das famílias continuou em níveis elevados, sendo um dos maiores riscos estruturais.
+*   **Conta Corrente:** Permaneceu superavitária, sustentada pela liderança em semicondutores.
+*   **Juros:** A taxa nominal caiu para **0,25%** em 2020, mas foi elevada para **2,0% em 2023** para combater a inflação global.
 
-### O Modelo AD-BT-ERU
-*   **K-Quarantine:** Ao evitar *lockdowns* totais, a Coreia manteve a curva **PS (Price-Setting)** mais estável do que outros países. A indústria continuou operando, permitindo que a Coreia capturasse a explosão de demanda global por semicondutores.
-*   **Exportações Recordes:** As exportações saltaram para **US$ 59,6 bilhões** em 2021, movendo a economia para baixo ao longo da curva **BT** (melhoria estrutural do saldo comercial).
+## 3. Ações de Política Econômica
 
-## 3. Ações Governamentais, Saúde e as Chaebols
+### Política Monetária
+*   O BoK foi um dos primeiros bancos centrais de economias desenvolvidas a iniciar o ciclo de alta de juros em 2021, demonstrando um compromisso rigoroso com a **Regra Monetária (MR)**.
 
-### Integração Saúde e Economia
-*   **K-Bangyeok:** O financiamento do sistema de "Teste, Rastreio e Tratamento" foi o maior estabilizador econômico do país, permitindo a manutenção da atividade industrial (Oferta) sem sacrificar a saúde pública.
-*   **Suporte às PMEs:** O governo aprovou o *Ato de Compensação de Perdas de Pequenos Negócios (2021)*, uma medida fiscal direta para evitar o fechamento em massa de serviços.
+### Política Fiscal e Ações Governamentais
+*   **Korean New Deal (Digital e Verde):** Investimento massivo em inteligência artificial e energias renováveis.
+*   **Auxílios de Emergência:** Diversas rodadas de transferências diretas de renda para famílias e compensações para pequenos negócios.
+*   **Estratégia para as Chaebols (K-Chips Act):** O governo concedeu incentivos fiscais sem precedentes (até 25%) para investimentos de empresas como Samsung e SK Hynix em semicondutores, visando garantir a soberania tecnológica e deslocar a curva **PS para cima** no longo prazo.
 
-### O "Korean New Deal" e o Apoio às Chaebols
-Para garantir a liderança pós-pandemia, o governo Moon Jae-in lançou o **K-New Deal (Digital e Verde)**:
-*   **Investimento Estratégico:** Foco nos setores **BIG3**: Semicondutores, Carros do Futuro e Bio-saúde.
-*   **K-Chips Act:** Concessão de créditos fiscais de até 25% para investimentos das Chaebols (Samsung, LG) em tecnologias críticas.
-*   **Teoria:** Esta política industrial visa **deslocar a PS para cima** no longo prazo, aumentando o salário real viável e a competitividade estrutural (deslocando a **ERU para a direita**).
-
-## 4. Conclusão do Período
-A resposta da Coreia do Sul à pandemia foi marcada pela sofisticação. O país utilizou seu espaço fiscal para proteger a demanda (IS), enquanto sua política industrial e sanitária preservava a oferta (PS/ERU). O resultado foi uma economia que não apenas sobreviveu, mas acelerou sua transição para uma liderança tecnológica global.
+## 4. Análise Teórica (Carlin & Soskice)
+*   **IS-PC-MR:** Choque duplo deslocou a **IS para a esquerda** e a **PC para cima**. A política fiscal agressiva forçou a **IS de volta para a direita**, enquanto o BoK ajustou o juro para reancorar a inflação na meta.
+*   **AD-BT-ERU:** A manutenção da atividade industrial (K-Quarantine) evitou um colapso da **PS**. A demanda externa por tecnologia manteve a posição na **BT** favorável.
 
 ---
-## Fontes e Referências
-
-### Dados Macroeconômicos e de Saúde
-*   **FRED (Federal Reserve Economic Data):** CPI Saúde e Consumo (KOR).
-*   **Banco Mundial (WDI):** Gastos com Saúde (% PIB) - Coreia.
-
-### Informações Históricas e Institucionais (Gov / MOEF)
-*   **K-Quarantine (K-Bangyeok):** Site Oficial da KDCA (Korea Disease Control).
-*   **Korean New Deal (2020):** Documento Completo do Plano Nacional.
-*   **K-Chips Act (2021):** Incentivos Estratégicos para Semicondutores.
-*   **Orçamentos Suplementares (2020):** Detalhes do 3º Orçamento Suplementar (MOEF).
-
-### Referencial Teórico
-*   **Carlin, W., & Soskice, D. (2015).** *Macroeconomics: Institutions, Instability, and the Financial System*. Oxford University Press.
-
----
-*Gráficos de Referência:*
-*   `3. Pandemia_saude.png`
-*   `3. Pandemia_hiato_inflacao.png`
-*   `3. Pandemia_teorico_ISPCMR.png`
+*Fontes: FRED, Banco Mundial (WDI), KDCA.*
+*Gráficos de Referência: 3. Pandemia_monetario.png, 3. Pandemia_desequilibrios.png.*
