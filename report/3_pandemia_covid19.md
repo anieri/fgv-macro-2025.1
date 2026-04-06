@@ -35,6 +35,22 @@ Para garantir a liderança pós-pandemia, o governo Moon Jae-in lançou o **K-Ne
 A resposta da Coreia do Sul à pandemia foi marcada pela sofisticação. O país utilizou seu espaço fiscal para proteger a demanda (IS), enquanto sua política industrial e sanitária preservava a oferta (PS/ERU). O resultado foi uma economia que não apenas sobreviveu, mas acelerou sua transição para uma liderança tecnológica global.
 
 ---
+## Fontes e Referências
+
+### Dados Macroeconômicos e de Saúde
+*   **FRED (Federal Reserve Economic Data):** CPI Saúde e Consumo (KOR).
+*   **Banco Mundial (WDI):** Gastos com Saúde (% PIB) - Coreia.
+
+### Informações Históricas e Institucionais (Gov / MOEF)
+*   **K-Quarantine (K-Bangyeok):** Site Oficial da KDCA (Korea Disease Control).
+*   **Korean New Deal (2020):** Documento Completo do Plano Nacional.
+*   **K-Chips Act (2021):** Incentivos Estratégicos para Semicondutores.
+*   **Orçamentos Suplementares (2020):** Detalhes do 3º Orçamento Suplementar (MOEF).
+
+### Referencial Teórico
+*   **Carlin, W., & Soskice, D. (2015).** *Macroeconomics: Institutions, Instability, and the Financial System*. Oxford University Press.
+
+---
 *Gráficos de Referência:*
 *   `3. Pandemia_saude.png`
 *   `3. Pandemia_hiato_inflacao.png`

@@ -33,6 +33,22 @@ O governo Lee Myung-bak adotou uma postura proativa e "pró-business":
 A crise de 2008 marcou a consolidação da Coreia do Sul como uma potência resiliente. O uso inteligente da desvalorização cambial (BT) e do estímulo fiscal focado em infraestrutura (IS) permitiu que o país evitasse a recessão prolongada vista em 1997, emergindo com Chaebols (Samsung, Hyundai) ainda mais fortes no cenário global.
 
 ---
+## Fontes e Referências
+
+### Dados Macroeconômicos
+*   **FRED (Federal Reserve Economic Data):** Séries de Exportações, Produção e Câmbio.
+*   **Banco Mundial (WDI):** Dados de Dívida e Gastos Governamentais.
+
+### Informações Históricas e Institucionais (MOEF / Fed)
+*   **Green New Deal (2009):** Relatório Oficial de Estímulo Fiscal (MOEF).
+*   **Bond Market Stabilization Fund:** Medidas de Liquidez Financeira.
+*   **Abolição do Limite de Investimento (2009):** Reforma do Monopoly Regulation Act.
+*   **Swap Cambial Fed-BoK:** Federal Reserve Press Release (2008).
+
+### Referencial Teórico
+*   **Carlin, W., & Soskice, D. (2015).** *Macroeconomics: Institutions, Instability, and the Financial System*. Oxford University Press.
+
+---
 *Gráficos de Referência:*
 *   `2. Crise Financeira_demanda.png`
 *   `2. Crise Financeira_hiato_inflacao.png`

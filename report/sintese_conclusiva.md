@@ -19,4 +19,18 @@ A aplicação do framework de Carlin & Soskice permitiu identificar padrões con
 A Coreia do Sul emerge desta análise não apenas como um caso de sucesso de industrialização, mas como um laboratório de política macroeconômica. A capacidade de integrar a saúde pública à estratégia industrial durante a pandemia de COVID-19 é o exemplo mais recente de sua agilidade institucional. Para o futuro, o desafio será manter esse dinamismo estrutural em um cenário de envelhecimento populacional e crescentes tensões nas cadeias globais de suprimentos.
 
 ---
-*Este relatório foi gerado como parte do Trabalho de Macroeconomia (2026.1), fundamentado em dados reais do FRED, Banco Mundial e OCDE.*
+## Fontes Consolidadas do Trabalho
+
+### Bases de Dados Principais
+*   **FRED South Korea Archive**
+*   **World Bank Data - Korea, Rep**
+*   **OECD Korea Portal**
+*   **BOK Economic Statistics (ECOS)**
+
+### Portais Governamentais e de Pesquisa
+*   **Ministry of Economy and Finance (English)**
+*   **KDI Economic Policy Museum**
+*   **KDCA (Controladoria de Doenças)**
+
+---
+*Este relatório foi gerado como parte do Trabalho de Macroeconomia (2026.1).*

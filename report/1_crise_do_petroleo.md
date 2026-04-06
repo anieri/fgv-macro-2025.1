@@ -34,6 +34,22 @@ Sob a presidência de Chun Doo-hwan e a liderança técnica de Kim Jae-ik, a Cor
 A gestão das Crises do Petróleo na Coreia do Sul demonstra uma transição dolorosa, mas eficaz, de um modelo de crescimento inflacionário liderado pelo Estado para uma economia estabilizada. O uso das Chaebols como ferramentas de política industrial permitiu que a base produtiva fosse preservada, pavimentando o caminho para a resiliência observada nas crises futuras.
 
 ---
+## Fontes e Referências
+
+### Dados Macroeconômicos
+*   **FRED (Federal Reserve Economic Data):** Séries de Dados da Coreia do Sul (KOR).
+*   **Banco Mundial (WDI):** Perfil de Dados da Coreia, Rep.
+
+### Informações Históricas e Institucionais (KDI)
+*   **HCI Drive (1973):** Heavy and Chemical Industrialization Policy.
+*   **Decreto de 3 de Agosto (1972):** Emergency Decree for Economic Stability and Growth.
+*   **CSP (1979/1980):** 1979 Comprehensive Stabilization Program.
+*   **Bank of Korea (BoK):** Economic Statistics System (ECOS).
+
+### Referencial Teórico
+*   **Carlin, W., & Soskice, D. (2015).** *Macroeconomics: Institutions, Instability, and the Financial System*. Oxford University Press.
+
+---
 *Gráficos de Referência:*
 *   `1. Crise do Petroleo_demanda.png`
 *   `1. Crise do Petroleo_hiato_inflacao.png`
