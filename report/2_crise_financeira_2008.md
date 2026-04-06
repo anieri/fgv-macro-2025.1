@@ -5,16 +5,17 @@ Em 2008, a Coreia do Sul já era uma economia desenvolvida e altamente integrada
 
 ## 2. Impactos Econômicos e Mecânica dos Choques (Item 3)
 
-### O Colapso da Demanda (Estado A → B)
-*   **Curva IS:** A queda drástica nas exportações netas ($X$) deslocou a curva **IS severamente para a esquerda**. O impacto foi imediato: as exportações mensais caíram de **US$ 40 bilhões** para **US$ 23,6 bilhões** em apenas seis meses.
-*   **Curva AD:** No modelo AD-BT-ERU, a queda na renda mundial deslocou a curva **AD para baixo**, abrindo um profundo hiato de produto negativo ($y < y_e$).
-*   **Produção:** A produção industrial caiu de um índice de **83,1** para **64,1**, gerando incerteza sobre a solvência dos grandes grupos.
+### O Colapso da Demanda Externa (Estado A → B)
+O choque de 2008 atingiu a Coreia do Sul via demanda agregada.
+*   **Curva IS:** A queda nas exportações netas ($X$) deslocou a curva **IS severamente para a esquerda**. O impacto nas exportações mensais foi um recuo de 40%, abrindo um hiato de produto negativo profundo ($y < y_e$).
+*   **Curva AD:** No modelo de economia aberta, a queda na demanda mundial deslocou a curva **AD para baixo**. Em um regime de câmbio flutuante, o Won depreciou de **914 para 1.449 Won/USD**, movendo a economia para a direita ao longo da curva **BT** (Estado B), o que amorteceu o colapso.
+*   **Produção e Produção Industrial:** O índice caiu de **83,1 para 64,1**, gerando um choque de confiança.
 
 ### Resposta de Política e Estabilização (Estado B → C)
-A Coreia do Sul respondeu de forma rápida e proativa, utilizando todas as ferramentas macroeconômicas.
-*   **Política Monetária (MR):** O Banco da Coreia (BoK) cortou as taxas nominais de **3,50% para 1,25%**, movendo a economia para baixo pela **curva MR** e estabilizando as expectativas de inflação, que caíram de 5,9% para 1,6%.
-*   **Política Fiscal (Governo):** O governo Lee Myung-bak lançou o **Green New Deal (2009)**, um pacote de **50 trilhões de KRW** focado em infraestrutura e novas tecnologias. Isso deslocou a curva **IS de volta para a direita**, forçando a recuperação em "V".
-*   **Ações com as Chaebols:** O governo aboliu o limite total de investimento cruzado, permitindo que as **Chaebols** (Samsung, Hyundai) usassem seu enorme capital interno para expandir e capturar fatias de mercado deixadas por concorrentes ocidentais em crise.
+A resposta foi rápida e orquestrada entre as autoridades fiscal e monetária.
+*   **Política Monetária (MR):** O Banco da Coreia (BoK) desceu agressivamente pela **curva MR**, cortando juros nominais para **1,25%**. Ao fazer isso, o BC estimula o consumo e investimento doméstico, combatendo a queda da demanda externa.
+*   **Política Fiscal (Governo):** O **Green New Deal (2009)** injetou **50 trilhões de KRW**, deslocando a curva **IS de volta para a direita** (Estado C). Isso permitiu à Coreia ser um dos primeiros países a sair da recessão em 2009.
+*   **Ações Estratégicas com as Chaebols:** Ao flexibilizar as regras de investimento, o governo permitiu que as **Chaebols** (Samsung, Hyundai) aproveitassem a depreciação do câmbio para ganhar mercado global de concorrentes que estavam sob restrição de liquidez severa.
 
 ## 3. Desequilíbrios Macroeconômicos e Financeiros
 *   **Ajuste Cambial:** O Won depreciou de **914 para 1.449 Won/USD**, atuando como um "amortecedor" natural que moveu a economia ao longo da curva **BT** (Estado C). Isso permitiu que o saldo comercial permanecesse positivo, apesar da crise.

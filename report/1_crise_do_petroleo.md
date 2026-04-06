@@ -6,16 +6,17 @@ Na década de 1970, a Coreia do Sul implementou o ambicioso plano de **Industria
 ## 2. Impactos Econômicos e Mecânica dos Choques (Item 3)
 
 ### O Choque de Oferta (Estado A → B)
-O aumento dos preços do petróleo em 1973 e 1979 representou um **choque de oferta negativo clássico**.
-*   **Curva PC:** O aumento dos custos de insumos deslocou a **Curva de Phillips (PC) para cima**, saltando de uma inflação de ~7% para **29,2% em 1974**.
-*   **Curva ERU/PS:** O custo energético reduziu o lucro das empresas, deslocando a curva **PS para baixo**. Como resultado, o salário real viável caiu, movendo a **ERU para a esquerda** e reduzindo o produto potencial sustentável ($y_e \rightarrow y_e'$).
-*   **Resultado:** Estagflação severa, com o PIB real caindo em 1980 pela primeira vez na história moderna (-1,5%).
+O aumento dos preços do petróleo em 1973 e 1979 representou um **choque de oferta negativo clássico**, afetando o lado da produção.
+*   **Curva PC:** O aumento dos custos de insumos importados deslocou a **Curva de Phillips (PC) para cima**, refletindo que, para qualquer nível de produto, a inflação agora seria maior. Isso é visível no salto da inflação para **29,2% em 1974**.
+*   **Curva ERU/PS:** No modelo de economia aberta, o custo energético reduz a margem de lucro das empresas para um dado salário real. Isso desloca a curva **PS (Price-Setting) para baixo**. Como consequência, o equilíbrio no mercado de trabalho ocorre em um nível de produto menor, movendo a **ERU (Equilibrium Real Wage) para a esquerda**.
+*   **Resultado:** O produto potencial sustentável ($y_e$) foi reduzido, gerando estagflação severa. O PIB real caiu em 1980 pela primeira vez na história moderna (-1,5%).
 
 ### Resposta de Política e Estabilização (Estado B → C)
-A Coreia inicialmente tentou "acomodar" o choque para não parar as obras da HCI.
-*   **Ação Governamental (Fiscal):** O governo manteve o investimento ($I$) alto via subsídios, tentando segurar a curva **IS** à direita do novo equilíbrio, o que alimentou a inflação.
-*   **O Decreto de 3 de Agosto (1972):** Medida drástica que resgatou as Chaebols da insolvência ao congelar dívidas no mercado informal, permitindo que a oferta (PS) não colapsasse totalmente por falências em massa.
-*   **Aparato Monetário (BC):** Após 1980, houve uma mudança drástica na **Regra Monetária (MR)**. O Banco da Coreia (BoK) elevou os juros nominais para **21%** (Estado C), movendo a economia ao longo da MR para reancorar as expectativas e trazer a inflação para o patamar de 3% em 1984.
+A Coreia inicialmente tentou "acomodar" o choque para não parar as obras da HCI, mantendo uma política expansionista.
+*   **Ação Governamental (Fiscal):** O governo manteve o investimento ($I$) alto via subsídios e crédito direcionado às **Chaebols**, segurando a curva **IS** à direita do novo equilíbrio. Embora tenha preservado a capacidade industrial, essa ação deslocou a economia para pontos de inflação ainda mais alta na curva PC.
+*   **O Decreto de 3 de Agosto (1972):** Esta intervenção radical atuou na solvência das empresas, permitindo que a curva **PS** não colapsasse totalmente por falências em massa, preservando o lado da oferta.
+*   **Aparato Monetário (BC):** A virada ocorreu com o **Plano de Estabilização Abrangente (CSP)**. O Banco da Coreia (BoK) elevou os juros nominais para **21%** (Estado C). No modelo, o BC "subiu" pela **Regra Monetária (MR)**, aceitando uma recessão temporária para quebrar a inércia inflacionária e trazer a inflação para o patamar de 3% em 1984.
+
 
 ## 3. Desequilíbrios Macroeconômicos e Financeiros
 *   **Setor Externo:** O custo das importações de energia gerou déficits profundos na **Balança de Conta Corrente**. A Coreia respondeu com uma **maxidesvalorização de 20% no Won** em 1980, deslocando a curva **AD** para cima via ganhos de competitividade externa ($q \uparrow$).
