@@ -30,6 +30,14 @@ def calculate_derived_variables(df):
         # Normalizar para q=1 no início da série para facilitar visualização de depreciação/apreciação
         df['Real_Exchange_Rate'] = q / q.dropna().iloc[0]
     
+    # 3. Grau de Abertura (Exp + Imp) / PIB
+    if 'Exp_GDP' in df.columns and 'Imp_GDP' in df.columns:
+        df['Trade_Openness'] = df['Exp_GDP'] + df['Imp_GDP']
+    
+    # 4. Crescimento PIB Real KOR (YoY)
+    if 'Real_GDP_Q' in df.columns:
+        df['KOR_GDP_Growth'] = df['Real_GDP_Q'].pct_change(periods=4, fill_method=None) * 100
+
     return df
 
 def run_analysis():
@@ -52,6 +60,10 @@ def run_analysis():
     df['Output_Gap'] = calculate_output_gap(df)
     df = calculate_derived_variables(df)
     
+    # Salvar dataset final com variáveis derivadas
+    df.to_csv('data/south_korea_comprehensive_final.csv')
+    print("Dataset final com variáveis derivadas salvo em data/south_korea_comprehensive_final.csv")
+    
     # 3. Inicializar Visualizador
     visualizer = MacroVisualizer(output_dir='plots/pt-br')
 
@@ -60,8 +72,13 @@ def run_analysis():
         '1. Crise do Petroleo': ('1970-01-01', '1985-12-31', '1. Crise do Petróleo (1970-1985)'),
         'Crise_Asiatica': ('1995-01-01', '2002-12-31', 'Crise Asiática (1995-2002)'),
         '2. Crise Financeira': ('2007-01-01', '2012-12-31', '2. Crise Financeira Global (2007-2012)'),
-        '3. Pandemia': ('2019-01-01', '2024-12-31', '3. Pandemia COVID-19 (2019-2024)')
+        '3. Pandemia': ('2019-01-01', '2024-12-31', '3. Pandemia COVID-19 (2019-2024)'),
+        '4. Quadro Atual': ('2022-01-01', '2024-12-31', '4. Quadro Atual (2022-2024)')
     }
+
+    # Gráfico de Longo Prazo: Grau de Abertura
+    print("Gerando gráfico de Abertura Comercial...")
+    visualizer.plot_openness(df, "Evolução do Grau de Abertura Comercial", "longo_prazo_abertura.png")
 
     # 5. Loop de Análise por Crise
     for key, (start, end, label) in crises.items():
@@ -69,8 +86,6 @@ def run_analysis():
         df_period = df.loc[start:end]
         
         # Dashboard de Demanda (C, I, G, X, M)
-        # Note: Exports_M and Imports_M are monthly, while others are quarterly/annual.
-        # We plot what we have.
         visualizer.plot_time_series(
             df_period, ['Consumption_Q', 'Investment_Q', 'Gov_Spending_Q', 'Exports_M', 'Imports_M'],
             f"Componentes da Demanda ({label})", "Valor", 
@@ -89,6 +104,27 @@ def run_analysis():
             f"{key}_desequilibrios.png", source="Banco Mundial (WDI)", period_label=label
         )
 
+        # Dashboard Comparativo OCDE
+        visualizer.plot_benchmark(
+            df_period, ['CPI_YoY'], ['OECD_Inflation'],
+            f"Inflação Comparada ({label})", f"{key}_benchmark_inflacao.png", source="FRED e WDI", period_label=label
+        )
+        visualizer.plot_benchmark(
+            df_period, ['KOR_GDP_Growth'], ['OECD_GDP_Growth'],
+            f"Crescimento Comparado ({label})", f"{key}_benchmark_pib.png", source="FRED e WDI", period_label=label
+        )
+
+        # Dashboard Institucional (Confiança e Salários)
+        if "Petroleo" not in key:
+            visualizer.plot_institutional(
+                df_period, f"Confiança e Ciclo ({label})", 
+                f"{key}_institucional.png", source="FRED", period_label=label
+            )
+            visualizer.plot_time_series(
+                df_period, ['Real_Wages'], f"Evolução do Salário Real ({label})", "Índice",
+                f"{key}_salario_real.png", source="FRED", period_label=label
+            )
+
         # Dashboard de Oferta (Setorial)
         visualizer.plot_time_series(
             df_period, ['Agri_VA', 'Ind_VA', 'Srv_VA'],
@@ -96,67 +132,68 @@ def run_analysis():
             f"{key}_oferta.png", source="Banco Mundial (WDI)", period_label=label
         )
 
-        # Gráficos de Evolução Teórica (Estados A, B, C)
-        y_e = 100
-        is_pc_mr = ISPCMR(y_e=y_e, pi_T=2.0)
-        ad_bt_eru = ADBTERU(y_e=y_e)
-        
-        print(f"Gerando Evolução Teórica para {key}...")
-        
-        # Cenários de Evolução customizados por crise
-        if "Petroleo" in key:
-            states_is_pc_mr = {
-                'A': {'pi_lagged': 2.0},
-                'B': {'pi_lagged': 2.0, 'pc_shift': 8.0}, # Choque de Oferta
-                'C': {'pi_lagged': 8.0, 'pc_shift': 0, 'is_shift': -5.0} # Resposta BC e Fiscal
-            }
-            states_ad_bt_eru = {
-                'A': {},
-                'B': {'bt_shift': 0.5}, # Piora na balança comercial
-                'C': {'bt_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
-            }
-        elif "2008" in key:
-            states_is_pc_mr = {
-                'A': {'pi_lagged': 3.0},
-                'B': {'pi_lagged': 3.0, 'is_shift': -8.0}, # Queda Exportações
-                'C': {'pi_lagged': 2.0, 'is_shift': 0.0} # Estímulo Fiscal (volta IS)
-            }
-            states_ad_bt_eru = {
-                'A': {},
-                'B': {'ad_shift': -0.8}, # Queda na demanda global
-                'C': {'ad_shift': -0.8, 'eru_shift': 0.2} # Melhora competitividade/PS
-            }
-        elif "Pandemia" in key:
-            states_is_pc_mr = {
-                'A': {'pi_lagged': 1.0},
-                'B': {'pi_lagged': 1.0, 'is_shift': -6.0, 'pc_shift': 3.0}, # Choque misto
-                'C': {'pi_lagged': 3.0, 'is_shift': 0.0, 'pc_shift': 0} # Resposta Massiva
-            }
-            states_ad_bt_eru = {
-                'A': {},
-                'B': {'ad_shift': -0.5},
-                'C': {'ad_shift': -0.5, 'eru_shift': 0.3} # Liderança Tecnológica (ERU p/ cima)
-            }
-        else: # Crise Asiática ou Outros
-            states_is_pc_mr = {
-                'A': {'pi_lagged': 4.0},
-                'B': {'pi_lagged': 4.0, 'is_shift': -10.0},
-                'C': {'pi_lagged': 6.0, 'is_shift': -2.0}
-            }
-            states_ad_bt_eru = {
-                'A': {},
-                'B': {'ad_shift': -1.0},
-                'C': {'ad_shift': -1.0, 'bt_shift': -0.5}
-            }
+        # Gráficos de Evolução Teórica (Apenas para as crises principais, não para Quadro Atual)
+        if "Quadro Atual" not in label:
+            y_e = 100
+            is_pc_mr = ISPCMR(y_e=y_e, pi_T=2.0)
+            ad_bt_eru = ADBTERU(y_e=y_e)
+            
+            print(f"Gerando Evolução Teórica para {key}...")
+            
+            # Cenários de Evolução customizados por crise
+            if "Petroleo" in key:
+                states_is_pc_mr = {
+                    'A': {'pi_lagged': 2.0},
+                    'B': {'pi_lagged': 2.0, 'pc_shift': 8.0}, # Choque de Oferta
+                    'C': {'pi_lagged': 8.0, 'pc_shift': 0, 'is_shift': -5.0} # Resposta BC e Fiscal
+                }
+                states_ad_bt_eru = {
+                    'A': {},
+                    'B': {'bt_shift': 0.5}, # Piora na balança comercial
+                    'C': {'bt_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
+                }
+            elif "2008" in key:
+                states_is_pc_mr = {
+                    'A': {'pi_lagged': 3.0},
+                    'B': {'pi_lagged': 3.0, 'is_shift': -8.0}, # Queda Exportações
+                    'C': {'pi_lagged': 2.0, 'is_shift': 0.0} # Estímulo Fiscal (volta IS)
+                }
+                states_ad_bt_eru = {
+                    'A': {},
+                    'B': {'ad_shift': -0.8}, # Queda na demanda global
+                    'C': {'ad_shift': -0.8, 'eru_shift': 0.2} # Melhora competitividade/PS
+                }
+            elif "Pandemia" in key:
+                states_is_pc_mr = {
+                    'A': {'pi_lagged': 1.0},
+                    'B': {'pi_lagged': 1.0, 'is_shift': -6.0, 'pc_shift': 3.0}, # Choque misto
+                    'C': {'pi_lagged': 3.0, 'is_shift': 0.0, 'pc_shift': 0} # Resposta Massiva
+                }
+                states_ad_bt_eru = {
+                    'A': {},
+                    'B': {'ad_shift': -0.5},
+                    'C': {'ad_shift': -0.5, 'eru_shift': 0.3} # Liderança Tecnológica (ERU p/ cima)
+                }
+            else: # Crise Asiática ou Outros
+                states_is_pc_mr = {
+                    'A': {'pi_lagged': 4.0},
+                    'B': {'pi_lagged': 4.0, 'is_shift': -10.0},
+                    'C': {'pi_lagged': 6.0, 'is_shift': -2.0}
+                }
+                states_ad_bt_eru = {
+                    'A': {},
+                    'B': {'ad_shift': -1.0},
+                    'C': {'ad_shift': -1.0, 'bt_shift': -0.5}
+                }
 
-        visualizer.plot_theoretical_evolution_is_pc_mr(
-            is_pc_mr, states_is_pc_mr, 
-            filename=f"{key}_evolucao_ISPCMR.png"
-        )
-        visualizer.plot_theoretical_evolution_ad_bt_eru(
-            ad_bt_eru, states_ad_bt_eru,
-            filename=f"{key}_evolucao_ADBTERU.png"
-        )
+            visualizer.plot_theoretical_evolution_is_pc_mr(
+                is_pc_mr, states_is_pc_mr, 
+                filename=f"{key}_evolucao_ISPCMR.png"
+            )
+            visualizer.plot_theoretical_evolution_ad_bt_eru(
+                ad_bt_eru, states_ad_bt_eru,
+                filename=f"{key}_evolucao_ADBTERU.png"
+            )
 
         # Dados Específicos de Saúde para Pandemia
         if "Pandemia" in key:

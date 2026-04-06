@@ -3,11 +3,12 @@
 ## 1. O Arco da Evolução Institucional
 A análise das três grandes crises (Petróleo, Financeira de 2008 e Pandemia) revela o amadurecimento institucional da Coreia do Sul. O país evoluiu de um modelo de crescimento forçado e vulnerável para uma economia tecnológica de alta resiliência.
 
-| Período | Natureza do Choque | Resposta Principal | Papel do Estado/Chaebols |
+| Crise | Resposta Fiscal Principal | Resposta Monetária | Papel das Chaebols |
 | :--- | :--- | :--- | :--- |
-| **Anos 70/80** | Oferta (Energia) | Juros Altos + Estabilização | Estado "Diretor" (HCI Drive) |
-| **2008** | Demanda (Externa) | Câmbio Flexível + Fiscal | Estado "Facilitador" (Green Growth) |
-| **2020** | Misto (Saúde/Global) | Integração Saúde + Inovação | Estado "Sócio" (K-New Deal) |
+| **Petróleo (70/80)** | HCI Drive (Indústria Pesada) | Acomodatícia -> Estabilização | Braços executores do Estado |
+| **Financeira (2008)** | Green New Deal | Cortes agressivos + Swaps | Consolidação de fatias de mercado |
+| **Pandemia (2020)** | Korean New Deal + Auxílios | Juro zero -> Reancoragem | Liderança tecnológica (Semicondutores) |
+| **Atual (2022-25)** | Estabilização de Suprimentos | Ciclo de Alta -> Flexibilização | Diversificação e Soberania Digital |
 
 ## 2. Lições do Modelo Carlin & Soskice
 

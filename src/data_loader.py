@@ -26,6 +26,8 @@ class SocioEconomicDataLoader:
             'CPI_Health': 'KORCP060000GYM',
             'CPI_Index_KOR': 'KORCPIALLMINMEI',
             'CPI_Index_USA': 'USACPIALLMINMEI',
+            'KOR_CCI': 'CSCICP03KRM665S',
+            'KOR_BCI': 'BSCICP03KRM665S',
             # Quarterly
             'Real_GDP_Q': 'NGDPRSAXDCKRQ',
             'Consumption_Q': 'NAEXKP02KRQ189S',
@@ -56,20 +58,32 @@ class SocioEconomicDataLoader:
             'Total_Health_Exp_GDP': 'SH.XPD.CHEX.GD.ZS',
             'Gov_Debt_GDP': 'GC.DOD.TOTL.GD.ZS',
             'Current_Account_GDP': 'BN.CAB.XOKA.GD.ZS',
-            'Private_Credit_GDP': 'FS.AST.PRVT.GD.ZS'
+            'Private_Credit_GDP': 'FS.AST.PRVT.GD.ZS',
+            'Exp_GDP': 'NE.EXP.GNFS.ZS',
+            'Imp_GDP': 'NE.IMP.GNFS.ZS'
         }
         
         try:
-            # wbgapi returns a pandas series/dataframe
-            data = wb.data.DataFrame(indicators.values(), self.country_code, time=range(self.start.year, self.end.year + 1))
-            # Reshape: the index is currently indicator codes, we want time
-            data = data.transpose()
-            # Map codes back to friendly names
+            # Fetch for South Korea
+            df_kor = wb.data.DataFrame(indicators.values(), self.country_code, time=range(self.start.year, self.end.year + 1))
+            df_kor = df_kor.transpose()
             inv_map = {v: k for k, v in indicators.items()}
-            data.columns = [inv_map.get(col, col) for col in data.columns]
-            # Convert index to datetime (format is YRXXXX)
-            data.index = pd.to_datetime([str(i).replace('YR', '') for i in data.index], format='%Y')
-            return data
+            df_kor.columns = [inv_map.get(col, col) for col in df_kor.columns]
+            df_kor.index = pd.to_datetime([str(i).replace('YR', '') for i in df_kor.index], format='%Y')
+
+            # Fetch for OECD (OED)
+            oecd_indicators = {
+                'NY.GDP.MKTP.KD.ZG': 'OECD_GDP_Growth',
+                'FP.CPI.TOTL.ZG': 'OECD_Inflation',
+                'SL.UEM.TOTL.ZS': 'OECD_Unemployment'
+            }
+            df_oecd = wb.data.DataFrame(oecd_indicators.keys(), 'OED', time=range(self.start.year, self.end.year + 1))
+            df_oecd = df_oecd.transpose()
+            df_oecd.columns = [oecd_indicators.get(col, col) for col in df_oecd.columns]
+            df_oecd.index = pd.to_datetime([str(i).replace('YR', '') for i in df_oecd.index], format='%Y')
+
+            # Combine
+            return df_kor.join(df_oecd, how='outer')
         except Exception as e:
             print(f"Erro ao coletar dados do WDI: {e}")
             return pd.DataFrame()

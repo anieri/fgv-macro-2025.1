@@ -50,6 +50,7 @@ class MacroVisualizer:
         plt.axhline(0, color='black', linestyle='-', linewidth=1.5, alpha=0.6, zorder=1)
         
         all_values = []
+        has_labels = False
         for col in columns:
             if col in df.columns:
                 valid_data = df[col].dropna()
@@ -57,6 +58,7 @@ class MacroVisualizer:
                     label = self._translate_col(col)
                     plt.plot(valid_data.index, valid_data.values, label=label, marker='o' if len(valid_data) < 50 else None)
                     all_values.extend(valid_data.values)
+                    has_labels = True
         
         ax = plt.gca()
         suffix = self._format_axis_labels(ax, all_values)
@@ -64,7 +66,8 @@ class MacroVisualizer:
         plt.title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
         plt.ylabel(f"{ylabel} {suffix}")
         plt.xlabel("Ano")
-        plt.legend()
+        if has_labels:
+            plt.legend()
         self._add_source(ax, f"Fonte: {source}")
         
         if period_label:
@@ -124,6 +127,79 @@ class MacroVisualizer:
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
+    def plot_benchmark(self, df, columns_kor, columns_oecd, title, filename, source="Banco Mundial (WDI)", period_label=None):
+        """Gráfico comparativo Coreia vs OCDE."""
+        fig, ax = plt.subplots(figsize=(12, 6))
+        
+        for col in columns_kor:
+            if col in df.columns:
+                valid = df[col].dropna()
+                if not valid.empty:
+                    ax.plot(valid.index, valid.values, label=f"Coreia: {self._translate_col(col)}", lw=2.5)
+        
+        for col in columns_oecd:
+            if col in df.columns:
+                valid = df[col].dropna()
+                if not valid.empty:
+                    ax.plot(valid.index, valid.values, label=f"OCDE: {self._translate_col(col)}", lw=2, linestyle='--')
+
+        ax.set_title(f"Coreia do Sul vs OCDE: {title}", fontsize=14, fontweight='bold')
+        ax.set_ylabel("Percentual (%)")
+        ax.set_xlabel("Ano")
+        ax.legend()
+        self._add_source(ax, f"Fonte: {source}")
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
+    def plot_institutional(self, df, title, filename, source="FRED", period_label=None):
+        """Gráfico de confiança vs Hiato do Produto."""
+        fig, ax1 = plt.subplots(figsize=(12, 6))
+        ax2 = ax1.twinx()
+        
+        # Plot Confidence on ax1
+        for col in ['KOR_CCI', 'KOR_BCI']:
+            if col in df.columns:
+                valid = df[col].dropna()
+                if not valid.empty:
+                    ax1.plot(valid.index, valid.values, label=self._translate_col(col), lw=2)
+        
+        # Plot Output Gap on ax2
+        if 'Output_Gap' in df.columns:
+            valid = df['Output_Gap'].dropna()
+            if not valid.empty:
+                ax2.fill_between(valid.index, 0, valid.values, alpha=0.3, color='gray', label='Hiato do Produto')
+                ax2.axhline(0, color='black', lw=1, alpha=0.5)
+
+        ax1.set_title(f"Ambiente Institucional e Confiança: {title}", fontsize=14, fontweight='bold')
+        ax1.set_ylabel("Índice de Confiança")
+        ax2.set_ylabel("Hiato do Produto (%)")
+        
+        # Combine legends
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(lines1 + lines2, labels1 + labels2, loc='lower left')
+        
+        self._add_source(ax1, f"Fonte: {source}")
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
+    def plot_openness(self, df, title, filename, source="Banco Mundial (WDI)"):
+        """Gráfico de evolução da abertura comercial."""
+        plt.figure(figsize=(12, 6))
+        if 'Trade_Openness' in df.columns:
+            valid = df['Trade_Openness'].dropna()
+            if not valid.empty:
+                plt.plot(valid.index, valid.values, lw=3, color='darkblue', label='Grau de Abertura')
+                plt.fill_between(valid.index, 0, valid.values, alpha=0.1, color='blue')
+                plt.legend()
+        self._add_source(plt.gca(), f"Fonte: {source}")
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
     def _translate_col(self, col):
         translations = {
             'CPI_YoY': 'Inflação (YoY %)',
@@ -148,7 +224,15 @@ class MacroVisualizer:
             'Policy_Rate': 'Taxa de Juros Nominal (%)',
             'Current_Account_GDP': 'Balanço de Conta Corrente (% PIB)',
             'Private_Credit_GDP': 'Crédito ao Setor Privado (% PIB)',
-            'Real_Exchange_Rate': 'Câmbio Real (q)'
+            'Real_Exchange_Rate': 'Câmbio Real (q)',
+            'OECD_GDP_Growth': 'Crescimento OCDE (%)',
+            'OECD_Inflation': 'Inflação OCDE (%)',
+            'OECD_Unemployment': 'Desemprego OCDE (%)',
+            'KOR_CCI': 'Confiança do Consumidor (CCI)',
+            'KOR_BCI': 'Confiança Empresarial (BCI)',
+            'Trade_Openness': 'Grau de Abertura (% PIB)',
+            'Real_Wages': 'Salário Real (Indice)',
+            'KOR_GDP_Growth': 'Crescimento PIB Real (%)'
         }
         return translations.get(col, col)
 

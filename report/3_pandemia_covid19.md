@@ -17,7 +17,12 @@ A Coreia usou seu espaço fiscal e sanitário para sustentar o lado da oferta e 
 *   **K-Chips Act e Chaebols:** O foco estratégico no **BIG3** (Semicondutores, Baterias e Bio-saúde) visou garantir a competitividade futura. No modelo, esses incentivos visam deslocar a **PS para cima** e a **ERU para a direita** de forma estrutural, aumentando o produto potencial futuro.
 *   **Política Monetária (MR):** O BoK cortou o juro para **0,25%** no início da crise, mas reviu sua postura rapidamente quando a inflação subiu. Ele elevou a taxa para **2,0% em 2023**, movendo-se preventivamente pela **Regra Monetária (MR)** para controlar as expectativas de longo prazo.
 
-## 3. Desequilíbrios Macroeconômicos e Financeiros
+## 3. Canais de Transmissão e Instituições
+*   **Canais Mistos:** A transmissão ocorreu tanto via oferta (parada de fábricas na China) quanto via demanda (isolamento doméstico). O alto **Grau de Abertura** expôs a Coreia à queda inicial do comércio global, mas também permitiu a captura da demanda subsequente por chips e eletrônicos.
+*   **Ambiente Institucional:** A confiança (medida pelo CCI e BCI) despencou em 2020, mas a resposta ágil do governo em evitar lockdowns rígidos preservou a confiança empresarial no longo prazo, permitindo que o investimento das Chaebols não parasse.
+*   **Comparativo OCDE:** Diferente da maioria dos países da OCDE, a Coreia evitou uma recessão técnica profunda em 2020, mantendo um dos melhores desempenhos de crescimento relativo do grupo.
+
+## 4. Desequilíbrios Macroeconômicos e Financeiros
 *   **Dívida Pública:** Houve um salto na dívida do governo, de **37,7% para 48,5% do PIB**, refletindo o esforço fiscal massivo para sustentar a IS.
 *   **Dívida Privada:** O endividamento recorde das famílias coreanas permanece como a principal vulnerabilidade financeira pós-pandemia.
 *   **Conta Corrente:** Permaneceu superavitária, com exportações saltando para **US$ 59,6 bilhões** em 2021, movendo a economia para uma posição favorável na curva **BT**.

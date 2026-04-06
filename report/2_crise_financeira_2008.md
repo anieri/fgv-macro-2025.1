@@ -17,7 +17,12 @@ A resposta foi rápida e orquestrada entre as autoridades fiscal e monetária.
 *   **Política Fiscal (Governo):** O **Green New Deal (2009)** injetou **50 trilhões de KRW**, deslocando a curva **IS de volta para a direita** (Estado C). Isso permitiu à Coreia ser um dos primeiros países a sair da recessão em 2009.
 *   **Ações Estratégicas com as Chaebols:** Ao flexibilizar as regras de investimento, o governo permitiu que as **Chaebols** (Samsung, Hyundai) aproveitassem a depreciação do câmbio para ganhar mercado global de concorrentes que estavam sob restrição de liquidez severa.
 
-## 3. Desequilíbrios Macroeconômicos e Financeiros
+## 3. Canais de Transmissão e Benchmark OCDE
+*   **Canal Comercial:** Em 2008, o **Grau de Abertura** da Coreia era significativamente maior que nos anos 70. Por isso, a queda na demanda mundial atingiu o país via colapso das exportações, e não via custos de insumos.
+*   **Canal Financeiro:** A dependência das Chaebols de financiamento em dólar no mercado de curto prazo foi um canal de estresse, mitigado pelo swap cambial com o Federal Reserve.
+*   **Comparativo OCDE:** A Coreia do Sul demonstrou uma resiliência superior à média da OCDE em 2008. Enquanto muitos países europeus e os EUA enfrentaram recessões prolongadas e crises bancárias sistêmicas, a recuperação coreana em "V" foi impulsionada pela rápida desvalorização do Won e pela saúde financeira prévia do setor público.
+
+## 4. Desequilíbrios Macroeconômicos e Financeiros
 *   **Ajuste Cambial:** O Won depreciou de **914 para 1.449 Won/USD**, atuando como um "amortecedor" natural que moveu a economia ao longo da curva **BT** (Estado C). Isso permitiu que o saldo comercial permanecesse positivo, apesar da crise.
 *   **Liquidez:** A criação do **Fundo de Estabilização do Mercado de Títulos** e o swap cambial com o Federal Reserve garantiram que o sistema financeiro não travasse.
 

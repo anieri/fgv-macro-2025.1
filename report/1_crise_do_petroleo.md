@@ -18,7 +18,9 @@ A Coreia inicialmente tentou "acomodar" o choque para não parar as obras da HCI
 *   **Aparato Monetário (BC):** A virada ocorreu com o **Plano de Estabilização Abrangente (CSP)**. O Banco da Coreia (BoK) elevou os juros nominais para **21%** (Estado C). No modelo, o BC "subiu" pela **Regra Monetária (MR)**, aceitando uma recessão temporária para quebrar a inércia inflacionária e trazer a inflação para o patamar de 3% em 1984.
 
 
-## 3. Desequilíbrios Macroeconômicos e Financeiros
+## 3. Desequilíbrios Macroeconômicos e Canais de Transmissão
+*   **Canal de Custos:** Sendo a Coreia um importador total de petróleo, o choque de 1973 foi transmitido instantaneamente para o setor industrial, elevando o custo de produção das Chaebols nascentes.
+*   **Grau de Abertura:** Na época, a economia coreana estava em plena expansão exportadora, mas o grau de abertura ainda era inferior ao que viria a ser em 2008. Isso permitiu um certo isolamento do consumo doméstico, embora a inflação importada tenha sido devastadora.
 *   **Setor Externo:** O custo das importações de energia gerou déficits profundos na **Balança de Conta Corrente**. A Coreia respondeu com uma **maxidesvalorização de 20% no Won** em 1980, deslocando a curva **AD** para cima via ganhos de competitividade externa ($q \uparrow$).
 *   **Dívida:** O país financiou sua industrialização com dívida externa massiva, tornando-se vulnerável a flutuações de juros globais.
 
