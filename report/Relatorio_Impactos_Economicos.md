@@ -28,38 +28,51 @@ Como um país totalmente dependente de importações de energia, o choque de 197
 
 #### 3.1.2. Lado da Demanda
 A demanda foi sustentada artificialmente via **Investimento (I)** massivo. O governo direcionou crédito barato ("Policy Loans") para as Chaebols continuarem seus projetos de siderurgia e construção naval, mesmo com a queda da demanda global por consumo.
-*   **Componentes:** O gráfico de demanda mostra que as exportações (X) e o investimento (I) foram os motores que evitaram um colapso total inicial, embora ao custo de desequilíbrios nominais.
+*   **Componentes:** O gráfico de demanda mostra que as exportações (X) e o investimento (I) foram os motores que evitaram um colapso total inicial. Note que todos os componentes estão expressos em **USD constantes de 2015** para permitir a comparação direta de escalas.
 
-![Componentes da Demanda: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_demanda.png){width=85%}
+![Componentes da Demanda (USD 2015): Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_demanda.png){width=85%}
 
 #### 3.1.3. Desequilíbrios Macroeconômicos e Financeiros
 O impacto mais visível foi a **inflação**, que saltou para **29,2% em 1974**. O déficit em conta corrente explodiu devido ao custo da energia, e a dívida externa cresceu rapidamente para financiar o modelo HCI.
 *   **Juros Reais:** Durante a fase de acomodação, os juros reais foram frequentemente negativos, o que ajudou no financiamento das empresas mas alimentou a espiral inflacionária.
+*   **Gestão da Dívida:** A dívida externa em relação ao RNB saltou durante este período, tornando o país vulnerável ao cenário de juros internacionais.
+
+![Estrutura de Endividamento: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_divida.png){width=85%}
 
 ![Política Monetária e Hiato: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_monetario.png){width=85%}
 
-#### 3.1.4. Ambiente Institucional e Confiança
+#### 3.1.4. Política Cambial e Competitividade
+A Coreia utilizou desvalorizações agressivas do Won para manter a competitividade das exportações frente ao choque de custos. O câmbio real (q) depreciou significativamente após 1980.
+
+![Evolução do Câmbio (Nominal e Real): Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_cambio.png){width=85%}
+
+#### 3.1.5. Ambiente Institucional e Confiança
 A relação Estado-Chaebol foi o pilar da resiliência. O governo atuava como garantidor de última instância (Decreto de 3 de Agosto). O mercado de trabalho era rigidamente controlado, com o salário real crescendo abaixo da produtividade para garantir a competitividade externa.
 
 ### 3.2. A Crise Financeira Global (2007-2012)
 
 #### 3.2.1. Canais de Transmissão e Lado da Demanda
 Em 2008, o choque foi de **demanda externa**. A Coreia já era uma potência exportadora integrada. A queda repentina na renda mundial causou um recuo de 40% nas exportações mensais.
-*   **Consumo (C) e Investimento (I):** Houve uma queda brusca inicial na confiança, mas a resposta fiscal rápida (Green New Deal) substituiu a demanda externa pela demanda pública (G).
+*   **Consumo (C) e Investimento (I):** Houve uma queda brusca inicial na confiança, mas a resposta fiscal rápida (Green New Deal) substituiu a demanda externa pela demanda pública (G). Todos os valores estão em USD 2015.
 
-![Componentes da Demanda: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_demanda.png){width=85%}
+![Componentes da Demanda (USD 2015): Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_demanda.png){width=85%}
 
 #### 3.2.2. Lado da Oferta e Produção
 A Indústria coreana demonstrou agilidade. Setores de semicondutores e automotivo aproveitaram a crise de concorrentes globais para expandir *market share*. O valor adicionado da indústria recuperou-se em formato de "V" já em 2009.
 
 ![Valor Adicionado por Setor: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_oferta.png){width=85%}
 
-#### 3.2.3. Desequilíbrios Macroeconômicos e Financeiros
-A Coreia utilizou a **taxa de câmbio** como principal amortecedor. O Won depreciou de 914 para 1.449 por dólar, restaurando a competitividade das exportações e movendo a economia ao longo da curva BT. Diferente dos anos 70, as contas correntes permaneceram sob controle graças a reservas sólidas.
+#### 3.2.3. Desequilíbrios Macroeconômicos e Estrutura de Dívida
+Diferente de 1997, a Coreia possuía reservas sólidas. O endividamento privado (setor bancário e corporativo) foi monitorado de perto, embora o crédito ao setor privado tenha permanecido em patamares elevados.
 
-![Desequilíbrios Macroeconômicos: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_desequilibrios.png){width=85%}
+![Estrutura de Endividamento: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_divida.png){width=85%}
 
-#### 3.2.4. Ambiente Institucional e Confiança
+#### 3.2.4. Política Cambial como Amortecedor
+A Coreia utilizou a **taxa de câmbio** como principal amortecedor. O Won depreciou de 914 para 1.449 por dólar, restaurando a competitividade das exportações e movendo a economia ao longo da curva BT.
+
+![Evolução do Câmbio (Nominal e Real): Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_cambio.png){width=85%}
+
+#### 3.2.5. Ambiente Institucional e Confiança
 O Índice de Confiança Empresarial (BCI) recuperou-se rapidamente após os pacotes de estímulo. A estabilidade dos salários reais permitiu que as empresas mantivessem margens durante a fase de depreciação cambial.
 
 ![Confiança e Ciclo: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_institucional.png){width=85%}
@@ -68,21 +81,26 @@ O Índice de Confiança Empresarial (BCI) recuperou-se rapidamente após os paco
 
 #### 3.3.1. Canais de Transmissão e Choque Misto
 A pandemia foi um choque simultâneo: queda no consumo doméstico (isolamento) e ruptura de oferta global (chips e frete).
-*   **Demanda:** O consumo das famílias (C) caiu 6,2% no primeiro trimestre de 2020. No entanto, as exportações tecnológicas (X) cresceram com a demanda global por eletrônicos e trabalho remoto.
+*   **Demanda:** O consumo das famílias (C) caiu inicialmente, mas as exportações tecnológicas (X) compensaram. Todos os componentes estão em USD 2015.
 
-![Componentes da Demanda: Pandemia](../plots/pt-br/3.%20Pandemia_demanda.png){width=85%}
+![Componentes da Demanda (USD 2015): Pandemia](../plots/pt-br/3.%20Pandemia_demanda.png){width=85%}
 
 #### 3.3.2. Lado da Oferta e Resiliência Setorial
 A Coreia evitou lockdowns totais (Estratégia K-Bangyeok), preservando a produção industrial. O setor de Serviços sofreu, mas foi compensado pelo salto no V.A. da Indústria de Alta Tecnologia.
 
 ![Valor Adicionado por Setor: Pandemia](../plots/pt-br/3.%20Pandemia_oferta.png){width=85%}
 
-#### 3.3.3. Desequilíbrios Macroeconômicos e Financeiros
-Houve um salto inédito na **Dívida Pública**, que passou de 37% para quase 50% do PIB devido aos sucessivos orçamentos suplementares. A inflação, contida inicialmente, subiu para 6,3% em 2022 refletindo custos globais.
+#### 3.3.3. Desequilíbrios Macroeconômicos e Salto na Dívida
+Houve um salto inédito na **Dívida Pública**, que passou de 37% para quase 50% do PIB devido aos sucessivos orçamentos suplementares. O crédito ao setor privado também continuou a crescer, gerando preocupações prudenciais.
 
-![Desequilíbrios Macroeconômicos: Pandemia](../plots/pt-br/3.%20Pandemia_desequilibrios.png){width=85%}
+![Estrutura de Endividamento: Pandemia](../plots/pt-br/3.%20Pandemia_divida.png){width=85%}
 
-#### 3.3.4. Ambiente Institucional e Saúde
+#### 3.3.4. Câmbio e Liquidez
+A volatilidade do Won foi contida por swaps com o Fed e pelo uso das reservas internacionais, mantendo o câmbio real em níveis competitivos.
+
+![Evolução do Câmbio (Nominal e Real): Pandemia](../plots/pt-br/3.%20Pandemia_cambio.png){width=85%}
+
+#### 3.3.5. Ambiente Institucional e Saúde
 A confiança do consumidor (CCI) foi severamente testada, mas a liderança tecnológica (Samsung, SK) e a gestão eficiente da saúde pública (K-Bangyeok) mantiveram a Coreia como um dos melhores desempenhos da OCDE.
 
 ![Indicadores de Saúde e Ciclo: Pandemia](../plots/pt-br/3.%20Pandemia_saude.png){width=85%}
@@ -90,14 +108,21 @@ A confiança do consumidor (CCI) foi severamente testada, mas a liderança tecno
 ### 3.4. Quadro Atual e Novos Desafios (2022-2025)
 
 #### 3.4.1. Demanda e Inflação Pós-Pandemia
-O cenário atual é de normalização monetária. A inflação retornou gradualmente à meta, mas o alto endividamento das famílias limita o crescimento do consumo (C). As exportações enfrentam a fragmentação das cadeias globais e a guerra tecnológica.
+O cenário atual é de normalização monetária. A inflação retornou gradualmente à meta, mas o alto endividamento privado limita o crescimento do consumo (C).
 
-![Inflação Comparada Coreia vs OCDE: Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_benchmark_inflacao.png){width=85%}
+![Componentes da Demanda (USD 2015): Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_demanda.png){width=85%}
 
 #### 3.4.2. Ambiente de Confiança e Dívida Privada
-O grande desequilíbrio atual não é público, mas **privado**. A dívida das famílias coreanas é uma das maiores do mundo em relação ao PIB, tornando a economia extremamente sensível a variações na taxa de juros.
+O grande desequilíbrio atual não é público, mas **privado**. O crédito ao setor privado é o maior componente do endividamento coreano, tornando a economia sensível aos juros.
 
-![Confiança e Ciclo: Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_institucional.png){width=85%}
+![Estrutura de Endividamento: Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_divida.png){width=85%}
+
+#### 3.4.3. Câmbio e Geopolítica
+O Won enfrenta pressões pela divergência de juros com os EUA e pelas tensões geopolíticas nas cadeias de suprimentos.
+
+![Evolução do Câmbio (Nominal e Real): Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_cambio.png){width=85%}
+
+#### 3.4.4. Confiança e Ciclo
 
 ---
 

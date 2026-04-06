@@ -200,17 +200,73 @@ class MacroVisualizer:
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
+    def plot_exchange_rate(self, df, title, filename, source="FRED", period_label=None):
+        """Gráfico de Câmbio Nominal e Real."""
+        fig, ax1 = plt.subplots(figsize=(12, 6))
+        ax2 = ax1.twinx()
+        
+        if 'Exchange_Rate' in df.columns:
+            valid = df['Exchange_Rate'].dropna()
+            if not valid.empty:
+                ax1.plot(valid.index, valid.values, label=self._translate_col('Exchange_Rate'), color='darkblue', lw=2)
+                ax1.set_ylabel("Won / USD (Nominal)")
+        
+        if 'Real_Exchange_Rate' in df.columns:
+            valid = df['Real_Exchange_Rate'].dropna()
+            if not valid.empty:
+                ax2.plot(valid.index, valid.values, label=self._translate_col('Real_Exchange_Rate'), color='darkred', lw=2, linestyle='--')
+                ax2.set_ylabel("Câmbio Real (q)")
+        
+        ax1.set_title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
+        ax1.set_xlabel("Ano")
+        
+        lines1, labels1 = ax1.get_legend_handles_labels()
+        lines2, labels2 = ax2.get_legend_handles_labels()
+        ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+        
+        self._add_source(ax1, f"Fonte: {source}")
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
+    def plot_debt_structure(self, df, title, filename, source="Banco Mundial (WDI)", period_label=None):
+        """Gráfico de Estrutura de Dívida (Pública, Privada, Externa)."""
+        plt.figure(figsize=(12, 6))
+        plt.axhline(0, color='black', linestyle='-', linewidth=1.2, alpha=0.5)
+        
+        cols = ['Gov_Debt_GDP', 'Private_Credit_GDP', 'External_Debt_GNI']
+        has_labels = False
+        for col in cols:
+            if col in df.columns:
+                valid = df[col].dropna()
+                if not valid.empty:
+                    plt.plot(valid.index, valid.values, label=self._translate_col(col), lw=2, marker='o', markersize=4)
+                    has_labels = True
+        
+        plt.title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
+        plt.ylabel("Percentual (%)")
+        plt.xlabel("Ano")
+        if has_labels:
+            plt.legend()
+            
+        self._add_source(plt.gca(), f"Fonte: {source}")
+        if period_label:
+            plt.figtext(0.1, 0.02, f"Período: {period_label}", fontsize=9)
+        plt.savefig(f"{self.output_dir}/{filename}")
+        plt.close()
+
     def _translate_col(self, col):
         translations = {
             'CPI_YoY': 'Inflação (YoY %)',
             'Unemployment': 'Taxa de Desemprego (%)',
             'Real_GDP_Q': 'PIB Real (Trimestral)',
-            'Consumption_Q': 'Consumo (C)',
-            'Gov_Spending_Q': 'Gastos do Governo (G)',
-            'Investment_Q': 'Investimento (I)',
-            'Exports_M': 'Exportações (Mês)',
-            'Imports_M': 'Importações (Mês)',
-            'Exchange_Rate': 'Câmbio (Won/USD)',
+            'Consumption_KD': 'Consumo (C)',
+            'Gov_Spending_KD': 'Gastos do Governo (G)',
+            'Investment_KD': 'Investimento (I)',
+            'Exports_KD': 'Exportações (X)',
+            'Imports_KD': 'Importações (M)',
+            'Exchange_Rate': 'Câmbio Nominal (Won/USD)',
             'Ind_Prod': 'Produção Industrial',
             'Agri_VA': 'V.A. Agropecuária',
             'Ind_VA': 'V.A. Indústria',
@@ -220,11 +276,13 @@ class MacroVisualizer:
             'CPI_Health': 'Inflação Saúde (YoY)',
             'Retail_Sales': 'Vendas no Varejo (Proxy C)',
             'Gov_Debt_GDP': 'Dívida Pública (% PIB)',
+            'External_Debt_GNI': 'Dívida Externa (% RNB)',
+            'Household_Debt_GDP': 'Dívida das Famílias (% PIB)',
             'Real_Interest_Rate': 'Taxa de Juros Real (%)',
             'Policy_Rate': 'Taxa de Juros Nominal (%)',
             'Current_Account_GDP': 'Balanço de Conta Corrente (% PIB)',
             'Private_Credit_GDP': 'Crédito ao Setor Privado (% PIB)',
-            'Real_Exchange_Rate': 'Câmbio Real (q)',
+            'Real_Exchange_Rate': 'Taxa de Câmbio Real (q)',
             'OECD_GDP_Growth': 'Crescimento OCDE (%)',
             'OECD_Inflation': 'Inflação OCDE (%)',
             'OECD_Unemployment': 'Desemprego OCDE (%)',

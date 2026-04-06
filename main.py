@@ -87,9 +87,21 @@ def run_analysis():
         
         # Dashboard de Demanda (C, I, G, X, M)
         visualizer.plot_time_series(
-            df_period, ['Consumption_Q', 'Investment_Q', 'Gov_Spending_Q', 'Exports_M', 'Imports_M'],
-            f"Componentes da Demanda ({label})", "Valor", 
-            f"{key}_demanda.png", source="FRED", period_label=label
+            df_period, ['Consumption_KD', 'Investment_KD', 'Gov_Spending_KD', 'Exports_KD', 'Imports_KD'],
+            f"Componentes da Demanda ({label})", "Valor (USD 2015)", 
+            f"{key}_demanda.png", source="Banco Mundial (WDI)", period_label=label
+        )
+        
+        # Dashboard de Câmbio (Nominal e Real)
+        visualizer.plot_exchange_rate(
+            df_period, f"Evolução do Câmbio ({label})",
+            f"{key}_cambio.png", source="FRED", period_label=label
+        )
+
+        # Dashboard de Endividamento
+        visualizer.plot_debt_structure(
+            df_period, f"Estrutura de Endividamento ({label})",
+            f"{key}_divida.png", source="FRED e Banco Mundial", period_label=label
         )
         
         # Dashboard Monetário (Nova Versão)

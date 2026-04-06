@@ -19,8 +19,6 @@ class SocioEconomicDataLoader:
             'Unemployment': 'LRHUTTTTKRM156S',
             'Ind_Prod': 'KORPROINDMISMEI',
             'Exchange_Rate': 'EXKOUS',
-            'Exports_M': 'XTEXVA01KRM667S',
-            'Imports_M': 'XTIMVA01KRM667S',
             'Policy_Rate': 'INTDSRKRM193N',
             'Retail_Sales': 'KORSLRTTO01IXOBM',
             'CPI_Health': 'KORCP060000GYM',
@@ -30,9 +28,6 @@ class SocioEconomicDataLoader:
             'KOR_BCI': 'BSCICP03KRM665S',
             # Quarterly
             'Real_GDP_Q': 'NGDPRSAXDCKRQ',
-            'Consumption_Q': 'NAEXKP02KRQ189S',
-            'Gov_Spending_Q': 'NAEXKP03KRQ189S',
-            'Investment_Q': 'NAEXKP04KRQ189S'
         }
         
         df_list = []
@@ -57,11 +52,17 @@ class SocioEconomicDataLoader:
             'Private_Health_Exp_Total': 'SH.XPD.PVTD.CH.ZS',
             'Total_Health_Exp_GDP': 'SH.XPD.CHEX.GD.ZS',
             'Gov_Debt_GDP': 'GC.DOD.TOTL.GD.ZS',
-            'Current_Account_GDP': 'BN.CAB.XOKA.GD.ZS',
+            'External_Debt_GNI': 'DT.DOD.DECT.GN.ZS',
             'Private_Credit_GDP': 'FS.AST.PRVT.GD.ZS',
             'Exp_GDP': 'NE.EXP.GNFS.ZS',
             'Imp_GDP': 'NE.IMP.GNFS.ZS',
-            'KOR_GDP_Growth_WDI': 'NY.GDP.MKTP.KD.ZG'
+            'KOR_GDP_Growth_WDI': 'NY.GDP.MKTP.KD.ZG',
+            # Constant 2015 USD for demand components
+            'Consumption_KD': 'NE.CON.PRVT.KD',
+            'Gov_Spending_KD': 'NE.CON.GOVT.KD',
+            'Investment_KD': 'NE.GDI.FTOT.KD',
+            'Exports_KD': 'NE.EXP.GNFS.KD',
+            'Imports_KD': 'NE.IMP.GNFS.KD'
         }
         
         try:
