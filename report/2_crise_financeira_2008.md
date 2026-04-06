@@ -1,34 +1,30 @@
 # Relatório 2: A Crise Financeira Global e a Maturidade Exportadora (2007-2012)
 
 ## 1. Contexto e o Choque de Demanda Externa
-Diferente dos anos 70, o choque de 2008 foi de **demanda externa**. A Coreia do Sul, já uma potência exportadora, viu seus principais mercados (EUA e Europa) entrarem em recessão profunda.
+Em 2008, a Coreia do Sul já era uma economia desenvolvida e altamente integrada às cadeias globais. Ao contrário dos anos 70, o choque não foi de oferta (custos), mas sim de um colapso repentino na **demanda global**, afetando drasticamente o coração da economia coreana: as exportações ($X$).
 
-## 2. Impactos Econômicos (Item 3)
+## 2. Impactos Econômicos e Mecânica dos Choques (Item 3)
 
-### Lado da Demanda e Oferta
-*   **Exportações (X):** As exportações mensais despencaram de **US$ 40 bi** para **US$ 23,6 bi** em apenas seis meses.
-*   **Investimento (I):** O investimento privado recuou devido à incerteza global e ao travamento dos mercados de crédito internacionais.
-*   **Setores:** A indústria manufatureira voltada à exportação foi a mais atingida, mas recuperou-se em "V" já em 2009.
+### O Colapso da Demanda (Estado A → B)
+*   **Curva IS:** A queda drástica nas exportações netas ($X$) deslocou a curva **IS severamente para a esquerda**. O impacto foi imediato: as exportações mensais caíram de **US$ 40 bilhões** para **US$ 23,6 bilhões** em apenas seis meses.
+*   **Curva AD:** No modelo AD-BT-ERU, a queda na renda mundial deslocou a curva **AD para baixo**, abrindo um profundo hiato de produto negativo ($y < y_e$).
+*   **Produção:** A produção industrial caiu de um índice de **83,1** para **64,1**, gerando incerteza sobre a solvência dos grandes grupos.
 
-### Desequilíbrios Macroeconômicos e Fatores Financeiros
-*   **Conta Corrente:** Apesar do choque, a Coreia manteve um superávit em conta corrente (aprox. **1% a 3% do PIB**) devido à rápida desvalorização do Won, que barateou os produtos coreanos.
-*   **Câmbio:** O Won depreciou de **914 para 1.449 Won/USD**, atuando como um "amortecedor" natural.
-*   **Juros:** O juro nominal caiu drasticamente de **3,50% para 1,25%**, resultando em juros reais próximos de zero ou negativos, estimulando a recuperação.
+### Resposta de Política e Estabilização (Estado B → C)
+A Coreia do Sul respondeu de forma rápida e proativa, utilizando todas as ferramentas macroeconômicas.
+*   **Política Monetária (MR):** O Banco da Coreia (BoK) cortou as taxas nominais de **3,50% para 1,25%**, movendo a economia para baixo pela **curva MR** e estabilizando as expectativas de inflação, que caíram de 5,9% para 1,6%.
+*   **Política Fiscal (Governo):** O governo Lee Myung-bak lançou o **Green New Deal (2009)**, um pacote de **50 trilhões de KRW** focado em infraestrutura e novas tecnologias. Isso deslocou a curva **IS de volta para a direita**, forçando a recuperação em "V".
+*   **Ações com as Chaebols:** O governo aboliu o limite total de investimento cruzado, permitindo que as **Chaebols** (Samsung, Hyundai) usassem seu enorme capital interno para expandir e capturar fatias de mercado deixadas por concorrentes ocidentais em crise.
 
-## 3. Ações de Política Econômica
+## 3. Desequilíbrios Macroeconômicos e Financeiros
+*   **Ajuste Cambial:** O Won depreciou de **914 para 1.449 Won/USD**, atuando como um "amortecedor" natural que moveu a economia ao longo da curva **BT** (Estado C). Isso permitiu que o saldo comercial permanecesse positivo, apesar da crise.
+*   **Liquidez:** A criação do **Fundo de Estabilização do Mercado de Títulos** e o swap cambial com o Federal Reserve garantiram que o sistema financeiro não travasse.
 
-### Política Monetária
-*   O BoK cortou as taxas agressivamente e estabeleceu um **swap cambial com o Federal Reserve** para garantir liquidez em dólares, evitando uma crise cambial como a de 1997.
-
-### Política Fiscal e Ações Governamentais
-*   **Green New Deal (2009):** Um pacote de estímulo de **50 trilhões de KRW** focado em infraestrutura verde e tecnologia, deslocando a curva IS para a direita.
-*   **Ações com as Chaebols:** O governo aboliu o limite total de investimento cruzado para as Chaebols, permitindo que elas usassem seu capital interno para manter o ritmo de crescimento e capturar fatias de mercado de concorrentes globais em crise.
-*   **Fundo de Estabilização:** Criação de fundos para garantir a liquidez do mercado de títulos corporativos.
-
-## 4. Análise Teórica (Carlin & Soskice)
-*   **IS-PC-MR:** A queda em $X$ deslocou a **IS para a esquerda**. O BoK respondeu descendo pela **curva MR**, reduzindo juros para fechar o hiato do produto.
-*   **AD-BT-ERU:** A depreciação do Won ($q \uparrow$) moveu a economia ao longo da curva **BT**, mantendo o equilíbrio comercial mesmo com a queda da demanda global (**AD** para baixo).
+## 4. Conclusão: Maturidade e Resiliência
+A crise de 2008 marcou a consolidação da Coreia como uma potência resiliente. Ao contrário de 1997, o país possuía reservas sólidas e uma política industrial agressiva. O uso inteligente da desvalorização cambial (BT) e do estímulo fiscal via Chaebols (IS) permitiu que a economia coreana fosse uma das primeiras a emergir da recessão global.
 
 ---
-*Fontes: FRED, Banco Mundial (WDI), MOEF Korea.*
-*Gráficos de Referência: 2. Crise Financeira_monetario.png, 2. Crise Financeira_desequilibrios.png.*
+*Gráficos de Referência:*
+*   `2. Crise Financeira_evolucao_ISPCMR.png` (Trajetória A → B → C)
+*   `2. Crise Financeira_monetario.png` (Cortes de Juros e Meta de Inflação)
+*   `2. Crise Financeira_desequilibrios.png` (Estabilidade da Conta Corrente)

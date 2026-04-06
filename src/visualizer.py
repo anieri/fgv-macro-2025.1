@@ -156,79 +156,104 @@ class MacroVisualizer:
         }
         return translations.get(col, col)
 
-    def plot_is_pc_mr_theoretical(self, model, pi_lagged=3, filename='is_pc_mr_teorico.png'):
-        """Gera o diagrama IS-PC-MR de Carlin & Soskice."""
-        y_range = np.linspace(model.y_e - 10, model.y_e + 10, 100)
-        pi_pc = model.get_pc_curve(y_range, pi_lagged)
-        pi_mr = model.get_mr_curve(y_range)
-        
+    def plot_theoretical_evolution_is_pc_mr(self, model, states, filename):
+        """Plota a evolução teórica IS-PC-MR (Estados A, B, C)."""
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 12), sharex=True)
+        y_range = np.linspace(model.y_e - 15, model.y_e + 15, 100)
+        r_range = np.linspace(model.r_star - 5, model.r_star + 5, 100)
         
-        # PC-MR
-        ax1.plot(y_range, pi_pc, label=f'PC (Inflação Esperada={pi_lagged}%)', color='red', lw=2)
-        ax1.plot(y_range, pi_mr, label='Regra Monetária (MR)', color='blue', lw=2)
-        ax1.axvline(model.y_e, color='black', linestyle='--', alpha=0.5, label='y_e (Produto Potencial)')
-        ax1.axhline(model.pi_T, color='green', linestyle=':', alpha=0.5, label='Meta de Inflação (pi_T)')
-        ax1.set_ylabel('Inflação (%)')
-        ax1.set_title('Modelo de 3-Equações: PC-MR', fontsize=14)
+        colors = {'A': 'gray', 'B': 'red', 'C': 'blue'}
+        labels = {'A': 'A: Pré-Crise', 'B': 'B: Choque', 'C': 'C: Resposta'}
+        
+        # PC-MR plot (ax1)
+        mr = model.get_mr_curve(y_range)
+        ax1.plot(y_range, mr, color='black', lw=2, linestyle='--', label='Regra Monetária (MR)')
+        
+        points_pc_mr = {}
+        for state, params in states.items():
+            pc = model.get_pc_curve(y_range, params.get('pi_lagged', model.pi_T), params.get('pc_shift', 0))
+            ax1.plot(y_range, pc, color=colors[state], lw=1.5, alpha=0.7, label=f'PC ({state})')
+            
+            y_eq, pi_eq = model.solve_equilibrium_pc_mr(params.get('pi_lagged', model.pi_T), params.get('pc_shift', 0))
+            ax1.scatter(y_eq, pi_eq, color=colors[state], s=100, zorder=5)
+            ax1.text(y_eq + 0.5, pi_eq + 0.2, labels[state], color=colors[state], fontweight='bold')
+            points_pc_mr[state] = (y_eq, pi_eq)
+
+        # Draw arrows for PC-MR
+        if 'A' in points_pc_mr and 'B' in points_pc_mr:
+            ax1.annotate('', xy=points_pc_mr['B'], xytext=points_pc_mr['A'], 
+                         arrowprops=dict(arrowstyle="->", color='darkred', lw=2, alpha=0.6))
+        if 'B' in points_pc_mr and 'C' in points_pc_mr:
+            ax1.annotate('', xy=points_pc_mr['C'], xytext=points_pc_mr['B'], 
+                         arrowprops=dict(arrowstyle="->", color='darkblue', lw=2, alpha=0.6))
+
+        ax1.axvline(model.y_e, color='black', linestyle=':', alpha=0.5)
+        ax1.set_ylabel('Inflação (π %)')
+        ax1.set_title('Evolução Teórica: Diagrama PC-MR', fontsize=14, fontweight='bold')
         ax1.legend()
-        
-        # IS
-        r_range = np.linspace(model.r_star - 4, model.r_star + 4, 100)
-        y_is = model.get_is_curve(r_range)
-        ax2.plot(y_is, r_range, label='Curva IS', color='darkgreen', lw=2)
-        ax2.axvline(model.y_e, color='black', linestyle='--', alpha=0.5)
-        ax2.axhline(model.r_star, color='purple', linestyle=':', alpha=0.5, label='r* (Taxa Estabilizadora)')
+
+        # IS plot (ax2)
+        points_is = {}
+        for state, params in states.items():
+            y_is = model.get_is_curve(r_range, params.get('is_shift', 0))
+            ax2.plot(y_is, r_range, color=colors[state], lw=1.5, alpha=0.7, label=f'IS ({state})')
+            
+            y_curr = points_pc_mr[state][0]
+            r_eq = model.r_star + (model.y_e + params.get('is_shift', 0) - y_curr) / model.a
+            ax2.scatter(y_curr, r_eq, color=colors[state], s=100, zorder=5)
+            points_is[state] = (y_curr, r_eq)
+
+        if 'A' in points_is and 'B' in points_is:
+            ax2.annotate('', xy=points_is['B'], xytext=points_is['A'], 
+                         arrowprops=dict(arrowstyle="->", color='darkred', lw=2, alpha=0.6))
+        if 'B' in points_is and 'C' in points_is:
+            ax2.annotate('', xy=points_is['C'], xytext=points_is['B'], 
+                         arrowprops=dict(arrowstyle="->", color='darkblue', lw=2, alpha=0.6))
+
+        ax2.axvline(model.y_e, color='black', linestyle=':', alpha=0.5)
         ax2.set_xlabel('Produto (y)')
-        ax2.set_ylabel('Taxa de Juros Real (r)')
-        ax2.set_title('Curva IS', fontsize=14)
+        ax2.set_ylabel('Taxa de Juros Real (r %)')
+        ax2.set_title('Evolução Teórica: Curva IS', fontsize=14, fontweight='bold')
         ax2.legend()
         
         self._add_source(plt.gca(), "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
+        plt.tight_layout()
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
-    def plot_ad_bt_eru_theoretical(self, model, filename='ad_bt_eru_teorico.png'):
-        """Gera o diagrama AD-BT-ERU com eixo duplo para legibilidade das curvas BT e ERU."""
+    def plot_theoretical_evolution_ad_bt_eru(self, model, states, filename):
+        """Plota a evolução teórica AD-BT-ERU (Estados A, B, C)."""
+        fig, ax = plt.subplots(figsize=(10, 8))
         y_range = np.linspace(model.y_e - 15, model.y_e + 15, 100)
-        eru = model.get_eru_curve(y_range)
-        bt = model.get_bt_curve(y_range)
-        ad = model.get_ad_curve(y_range)
-
-        fig, ax1 = plt.subplots(figsize=(10, 8))
         
-        # Eixo Esquerdo: Curva AD (Maior Range/Escala Geral)
-        ax1.plot(y_range, ad, color='green', lw=3, label='AD (Demanda)')
-        ax1.set_xlabel('Produto (y)')
-        ax1.set_ylabel('Câmbio Real (q) - Escala AD', color='green', fontweight='bold')
-        ax1.tick_params(axis='y', labelcolor='green')
-        
-        # Eixo Direito: Zoom nas curvas BT e ERU
-        ax2 = ax1.twinx()
-        ax2.plot(y_range, bt, color='blue', lw=2.5, linestyle='-', label='BT')
-        ax2.plot(y_range, eru, color='red', lw=2.5, linestyle='-', label='ERU')
-        ax2.set_ylabel('Câmbio Real (q) - Escala BT e ERU', color='blue', fontweight='bold')
-        ax2.tick_params(axis='y', labelcolor='blue')
+        colors = {'A': 'gray', 'B': 'red', 'C': 'blue'}
+        labels = {'A': 'A: Pré-Crise', 'B': 'B: Choque', 'C': 'C: Resposta'}
 
-        # Centralizar ambos os eixos no q_bar
-        # Range amplo para AD
-        ax1.set_ylim(model.q_bar - 5, model.q_bar + 5)
-        # Range menor (zoom) para BT/ERU conforme pedido (perto de 1)
-        ax2.set_ylim(model.q_bar - 1, model.q_bar + 1)
+        for state, params in states.items():
+            ad = model.get_ad_curve(y_range, params.get('ad_shift', 0))
+            bt = model.get_bt_curve(y_range, params.get('bt_shift', 0))
+            eru = model.get_eru_curve(y_range, params.get('eru_shift', 0))
+            
+            ax.plot(y_range, ad, color=colors[state], lw=1.5, alpha=0.6, label=f'AD ({state})')
+            ax.plot(y_range, bt, color=colors[state], lw=1, linestyle='--', alpha=0.4)
+            ax.plot(y_range, eru, color=colors[state], lw=1, linestyle=':', alpha=0.4)
+            
+            slope_ad = 1 / (model.phi * 10)
+            slope_eru = model.gamma / 10
+            y_eq = model.y_e + (params.get('eru_shift', 0) - params.get('ad_shift', 0)) / (slope_ad + slope_eru)
+            q_eq = model.get_ad_curve(y_eq, params.get('ad_shift', 0))
+            
+            ax.scatter(y_eq, q_eq, color=colors[state], s=100, zorder=5)
+            ax.text(y_eq + 0.5, q_eq, labels[state], color=colors[state], fontweight='bold')
 
-        # Adicionar linhas de referência
-        ax1.axvline(model.y_e, color='black', linestyle='--', alpha=0.3, label='y_e')
-        ax1.axhline(model.q_bar, color='gray', linestyle=':', alpha=0.3)
+        ax.axvline(model.y_e, color='black', linestyle=':', alpha=0.5)
+        ax.set_xlabel('Produto (y)')
+        ax.set_ylabel('Taxa de Câmbio Real (q)')
+        ax.set_title('Evolução Teórica: Modelo AD-BT-ERU', fontsize=15, fontweight='bold')
+        ax.legend()
         
-        # Rótulos diretos para facilitar leitura
-        ax1.text(y_range[-1], ad[-1], ' AD', color='green', fontweight='bold', va='center')
-        ax2.text(y_range[-1], bt[-1], ' BT', color='blue', fontweight='bold', va='center')
-        ax2.text(y_range[-1], eru[-1], ' ERU', color='red', fontweight='bold', va='center')
-
-        plt.title('Modelo AD-BT-ERU: Equilíbrio de Economia Aberta', fontsize=15, fontweight='bold', pad=20)
-        self._add_source(ax1, "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
-        
-        fig.tight_layout()
+        self._add_source(ax, "Fonte: Elaboração baseada em Carlin & Soskice (2015)")
+        plt.tight_layout()
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 

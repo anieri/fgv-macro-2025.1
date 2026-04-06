@@ -1,35 +1,31 @@
 # Relatório 1: As Crises do Petróleo e a Consolidação do "Korea Inc." (1970-1985)
 
-## 1. Contexto Histórico e o Choque de Oferta
-Na década de 1970, a Coreia do Sul passava pela **Industrialização Pesada e Química (HCI Drive)**. Os choques de 1973 e 1979 foram desafios críticos devido à total dependência energética do país.
+## 1. Contexto Histórico e Estrutural
+Na década de 1970, a Coreia do Sul implementou o ambicioso plano de **Industrialização Pesada e Química (HCI Drive)**. Este modelo baseava-se em uma coordenação estreita entre o Estado e os grandes conglomerados (**Chaebols**), com o governo direcionando crédito barato ("Policy Loans") para setores estratégicos.
 
-## 2. Impactos Econômicos (Item 3)
+## 2. Impactos Econômicos e Mecânica dos Choques (Item 3)
 
-### Lado da Demanda e Oferta
-*   **Inflação:** O CPI YoY saltou para **29,2% em 1974** e atingiu o pico de **32,5% em 1980**.
-*   **Crescimento:** Em 1980, o PIB real sofreu sua primeira queda moderna (~ -1,5%).
-*   **Consumo e Investimento:** O investimento (I) foi mantido artificialmente alto pelo governo para não interromper a HCI, enquanto o consumo (C) foi pressionado pela inflação galopante.
-*   **Setores:** A indústria pesada (aço, naval) continuou recebendo subsídios, enquanto setores de bens de consumo sofreram com a queda do poder de compra.
+### O Choque de Oferta (Estado A → B)
+O aumento dos preços do petróleo em 1973 e 1979 representou um **choque de oferta negativo clássico**.
+*   **Curva PC:** O aumento dos custos de insumos deslocou a **Curva de Phillips (PC) para cima**, saltando de uma inflação de ~7% para **29,2% em 1974**.
+*   **Curva ERU/PS:** O custo energético reduziu o lucro das empresas, deslocando a curva **PS para baixo**. Como resultado, o salário real viável caiu, movendo a **ERU para a esquerda** e reduzindo o produto potencial sustentável ($y_e \rightarrow y_e'$).
+*   **Resultado:** Estagflação severa, com o PIB real caindo em 1980 pela primeira vez na história moderna (-1,5%).
 
-### Desequilíbrios Macroeconômicos e Fatores Financeiros
-*   **Dívida e Financiamento:** O financiamento da industrialização dependia de empréstimos externos, elevando a vulnerabilidade.
-*   **Taxa de Câmbio:** Houve uma **maxidesvalorização de 20% em 1980** para tentar restaurar a competitividade das exportações frente ao aumento dos custos de insumos.
-*   **Juros:** As taxas nominais eram altas (**11% a 21%**), mas os juros reais eram frequentemente negativos devido à inflação superior a 25%, o que representava um subsídio implícito às Chaebols.
+### Resposta de Política e Estabilização (Estado B → C)
+A Coreia inicialmente tentou "acomodar" o choque para não parar as obras da HCI.
+*   **Ação Governamental (Fiscal):** O governo manteve o investimento ($I$) alto via subsídios, tentando segurar a curva **IS** à direita do novo equilíbrio, o que alimentou a inflação.
+*   **O Decreto de 3 de Agosto (1972):** Medida drástica que resgatou as Chaebols da insolvência ao congelar dívidas no mercado informal, permitindo que a oferta (PS) não colapsasse totalmente por falências em massa.
+*   **Aparato Monetário (BC):** Após 1980, houve uma mudança drástica na **Regra Monetária (MR)**. O Banco da Coreia (BoK) elevou os juros nominais para **21%** (Estado C), movendo a economia ao longo da MR para reancorar as expectativas e trazer a inflação para o patamar de 3% em 1984.
 
-## 3. Ações de Política Econômica
+## 3. Desequilíbrios Macroeconômicos e Financeiros
+*   **Setor Externo:** O custo das importações de energia gerou déficits profundos na **Balança de Conta Corrente**. A Coreia respondeu com uma **maxidesvalorização de 20% no Won** em 1980, deslocando a curva **AD** para cima via ganhos de competitividade externa ($q \uparrow$).
+*   **Dívida:** O país financiou sua industrialização com dívida externa massiva, tornando-se vulnerável a flutuações de juros globais.
 
-### Política Monetária (Banco Central)
-*   Inicialmente, o Banco da Coreia (BoK) foi acomodatício para financiar o crescimento. Após 1980, sob o **Plano de Estabilização Abrangente (CSP)**, houve um aperto monetário rigoroso para quebrar a inércia inflacionária.
-
-### Política Fiscal e Ações Governamentais
-*   **HCI Drive:** O governo atuou como planejador central, direcionando crédito para setores estratégicos.
-*   **Decreto de 3 de Agosto (1972):** Uma intervenção radical que congelou dívidas das empresas no mercado informal, salvando as Chaebols da insolvência.
-*   **Apoio às Chaebols:** O Estado utilizou os "Policy Loans" (empréstimos direcionados) para transformar pequenos grupos em conglomerados globais (Hyundai, Samsung, Daewoo), garantindo que a curva IS não colapsasse.
-
-## 4. Análise Teórica (Carlin & Soskice)
-*   **IS-PC-MR:** O choque do petróleo deslocou a **PC para cima**. A resposta inicial foi manter o produto ($y$) alto, gerando inflação. A estabilização pós-1980 representou um movimento rigoroso na **MR** para trazer a inflação de volta à meta.
-*   **AD-BT-ERU:** A pressão na **BT** (custo do óleo) exigiu depreciação real ($q \uparrow$) e uma compressão do salário real (ERU para a esquerda) para manter a viabilidade econômica.
+## 4. Conclusão: Lições do "Korea Inc."
+A gestão das crises do petróleo provou a capacidade de coordenação do Estado coreano. Ao usar as Chaebols como braços da política industrial e aceitar um ajuste doloroso na MR após o período de expansão, a Coreia consolidou sua base manufatureira, transformando um choque de custos em uma oportunidade de modernização produtiva.
 
 ---
-*Fontes: FRED, Banco Mundial (WDI), Bank of Korea (ECOS).*
-*Gráficos de Referência: 1. Crise do Petroleo_monetario.png, 1. Crise do Petroleo_desequilibrios.png.*
+*Gráficos de Referência:*
+*   `1. Crise do Petroleo_evolucao_ISPCMR.png` (Trajetória A → B → C)
+*   `1. Crise do Petroleo_monetario.png` (Juros Reais e Inflação)
+*   `1. Crise do Petroleo_desequilibrios.png` (Dívida e Conta Corrente)

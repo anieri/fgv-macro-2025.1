@@ -96,22 +96,66 @@ def run_analysis():
             f"{key}_oferta.png", source="Banco Mundial (WDI)", period_label=label
         )
 
-        # Gráficos Teóricos para cada Crise
-        # Ajustamos a meta de inflação ou o choque dependendo do período
-        pi_expected = df_period['CPI_YoY'].mean()
+        # Gráficos de Evolução Teórica (Estados A, B, C)
         y_e = 100
-        
         is_pc_mr = ISPCMR(y_e=y_e, pi_T=2.0)
         ad_bt_eru = ADBTERU(y_e=y_e)
         
-        print(f"Gerando Diagramas Teóricos para {key}...")
-        visualizer.plot_is_pc_mr_theoretical(
-            is_pc_mr, pi_lagged=pi_expected, 
-            filename=f"{key}_teorico_ISPCMR.png"
+        print(f"Gerando Evolução Teórica para {key}...")
+        
+        # Cenários de Evolução customizados por crise
+        if "Petroleo" in key:
+            states_is_pc_mr = {
+                'A': {'pi_lagged': 2.0},
+                'B': {'pi_lagged': 2.0, 'pc_shift': 8.0}, # Choque de Oferta
+                'C': {'pi_lagged': 8.0, 'pc_shift': 0, 'is_shift': -5.0} # Resposta BC e Fiscal
+            }
+            states_ad_bt_eru = {
+                'A': {},
+                'B': {'bt_shift': 0.5}, # Piora na balança comercial
+                'C': {'bt_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
+            }
+        elif "2008" in key:
+            states_is_pc_mr = {
+                'A': {'pi_lagged': 3.0},
+                'B': {'pi_lagged': 3.0, 'is_shift': -8.0}, # Queda Exportações
+                'C': {'pi_lagged': 2.0, 'is_shift': 0.0} # Estímulo Fiscal (volta IS)
+            }
+            states_ad_bt_eru = {
+                'A': {},
+                'B': {'ad_shift': -0.8}, # Queda na demanda global
+                'C': {'ad_shift': -0.8, 'eru_shift': 0.2} # Melhora competitividade/PS
+            }
+        elif "Pandemia" in key:
+            states_is_pc_mr = {
+                'A': {'pi_lagged': 1.0},
+                'B': {'pi_lagged': 1.0, 'is_shift': -6.0, 'pc_shift': 3.0}, # Choque misto
+                'C': {'pi_lagged': 3.0, 'is_shift': 0.0, 'pc_shift': 0} # Resposta Massiva
+            }
+            states_ad_bt_eru = {
+                'A': {},
+                'B': {'ad_shift': -0.5},
+                'C': {'ad_shift': -0.5, 'eru_shift': 0.3} # Liderança Tecnológica (ERU p/ cima)
+            }
+        else: # Crise Asiática ou Outros
+            states_is_pc_mr = {
+                'A': {'pi_lagged': 4.0},
+                'B': {'pi_lagged': 4.0, 'is_shift': -10.0},
+                'C': {'pi_lagged': 6.0, 'is_shift': -2.0}
+            }
+            states_ad_bt_eru = {
+                'A': {},
+                'B': {'ad_shift': -1.0},
+                'C': {'ad_shift': -1.0, 'bt_shift': -0.5}
+            }
+
+        visualizer.plot_theoretical_evolution_is_pc_mr(
+            is_pc_mr, states_is_pc_mr, 
+            filename=f"{key}_evolucao_ISPCMR.png"
         )
-        visualizer.plot_ad_bt_eru_theoretical(
-            ad_bt_eru, 
-            filename=f"{key}_teorico_ADBTERU.png"
+        visualizer.plot_theoretical_evolution_ad_bt_eru(
+            ad_bt_eru, states_ad_bt_eru,
+            filename=f"{key}_evolucao_ADBTERU.png"
         )
 
         # Dados Específicos de Saúde para Pandemia
