@@ -232,7 +232,8 @@ class MacroVisualizer:
             'KOR_BCI': 'Confiança Empresarial (BCI)',
             'Trade_Openness': 'Grau de Abertura (% PIB)',
             'Real_Wages': 'Salário Real (Indice)',
-            'KOR_GDP_Growth': 'Crescimento PIB Real (%)'
+            'KOR_GDP_Growth': 'Crescimento PIB Real (%)',
+            'KOR_GDP_Growth_WDI': 'Crescimento PIB Real (%)'
         }
         return translations.get(col, col)
 

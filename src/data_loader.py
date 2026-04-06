@@ -60,7 +60,8 @@ class SocioEconomicDataLoader:
             'Current_Account_GDP': 'BN.CAB.XOKA.GD.ZS',
             'Private_Credit_GDP': 'FS.AST.PRVT.GD.ZS',
             'Exp_GDP': 'NE.EXP.GNFS.ZS',
-            'Imp_GDP': 'NE.IMP.GNFS.ZS'
+            'Imp_GDP': 'NE.IMP.GNFS.ZS',
+            'KOR_GDP_Growth_WDI': 'NY.GDP.MKTP.KD.ZG'
         }
         
         try:

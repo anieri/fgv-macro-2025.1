@@ -110,8 +110,8 @@ def run_analysis():
             f"Inflação Comparada ({label})", f"{key}_benchmark_inflacao.png", source="FRED e WDI", period_label=label
         )
         visualizer.plot_benchmark(
-            df_period, ['KOR_GDP_Growth'], ['OECD_GDP_Growth'],
-            f"Crescimento Comparado ({label})", f"{key}_benchmark_pib.png", source="FRED e WDI", period_label=label
+            df_period, ['KOR_GDP_Growth_WDI'], ['OECD_GDP_Growth'],
+            f"Crescimento Comparado ({label})", f"{key}_benchmark_pib.png", source="Banco Mundial (WDI)", period_label=label
         )
 
         # Dashboard Institucional (Confiança e Salários)
