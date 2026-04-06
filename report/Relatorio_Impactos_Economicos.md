@@ -6,107 +6,141 @@ header-includes:
   - \renewenvironment{figure}[1][2]{\origfigure[H]}{\endorigfigure}
 ---
 
-# Impactos Econômicos das Crises na Coreia do Sul (Item 3)
+# Relatório de Análise Macroeconômica: Coreia do Sul (1970-2025)
 
-## Introdução Geral
-A trajetória econômica da Coreia do Sul é marcada por uma transição acelerada de uma economia agrária para uma potência tecnológica global. Esta evolução foi testada por choques profundos, que serviram como catalisadores para reformas institucionais e reestruturações do seu modelo produtivo. A análise a seguir detalha os impactos das crises do Petróleo (1970/80), a Crise Financeira Global (2008), a Pandemia de COVID-19 (2020) e o cenário inflacionário atual. Utilizando o arcabouço teórico de Carlin & Soskice, mapeamos como a coordenação entre o Banco da Coreia, o Governo e os grandes conglomerados (Chaebols) permitiu ao país manter sua resiliência exportadora e estabilidade macroeconômica ao longo de cinco décadas.
+## 1. Introdução
+Este trabalho analisa a trajetória de resiliência da economia da Coreia do Sul frente às grandes crises globais dos últimos 50 anos: as Crises do Petróleo (anos 70/80), a Crise Financeira Global (2008) e a Pandemia de COVID-19, culminando no cenário atual (2022-2025). O objetivo é identificar como os canais de transmissão e o ambiente institucional coreano permitiram que o país passasse de uma economia em desenvolvimento para uma liderança tecnológica global, utilizando o arcabouço teórico de Carlin & Soskice (2015).
 
----
-
-## 1. As Crises do Petróleo e a Consolidação do "Korea Inc." (1970-1985)
-
-### Contexto Histórico e Estrutural
-Na década de 1970, a Coreia do Sul implementou o ambicioso plano de **Industrialização Pesada e Química (HCI Drive)**. Este modelo baseava-se em uma coordenação estreita entre o Estado e os grandes conglomerados (**Chaebols**), com o governo direcionando crédito barato ("Policy Loans") para setores estratégicos.
-
-### Impactos Econômicos e Mecânica dos Choques
-O aumento dos preços do petróleo em 1973 e 1979 representou um **choque de oferta negativo clássico**, afetando o lado da produção.
-
-*   **Curva PC:** O aumento dos custos de insumos importados deslocou a **Curva de Phillips (PC) para cima**. Isso é visível no salto da inflação para **29,2% em 1974**.
-*   **Curva ERU/PS:** O custo energético reduziu a margem de lucro das empresas, deslocando a curva **PS para baixo**. Como consequência, o equilíbrio no mercado de trabalho ocorre em um nível de produto menor, movendo a **ERU para a esquerda**.
-*   **Resultado:** O produto potencial sustentável ($y_e$) foi reduzido, gerando estagflação severa. O PIB real caiu em 1980 pela primeira vez na história moderna (-1,5%).
-
-![Evolução Teórica IS-PC-MR: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_evolucao_ISPCMR.png){width=80%}
-
-![Evolução Teórica AD-BT-ERU: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_evolucao_ADBTERU.png){width=80%}
-
-### Resposta de Política e Estabilização
-*   **Ação Governamental (Fiscal):** O governo manteve o investimento ($I$) alto via subsídios e crédito direcionado às **Chaebols**, segurando a curva **IS** à direita do novo equilíbrio para preservar a capacidade industrial.
-*   **O Decreto de 3 de Agosto (1972):** Esta intervenção radical atuou na solvência das empresas, permitindo que a curva **PS** não colapsasse totalmente por falências em massa.
-*   **Aparato Monetário (BC):** Após 1980, o Banco da Coreia (BoK) elevou os juros nominais para **21%** (Estado C), subindo pela **Regra Monetária (MR)** para quebrar a inércia inflacionária.
-
-![Indicadores Monetários: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_monetario.png){width=85%}
+## 2. Desempenho Econômico Prévio
+Antes da primeira crise do petróleo, a Coreia do Sul iniciou sua "Milagre do Rio Han". Nos anos 60, o país abandonou a substituição de importações em favor de uma Industrialização Orientada para a Exportação (EOI). O PIB crescia a taxas de dois dígitos, impulsionado pela indústria leve (têxteis e calçados) e por uma coordenação centralizada que começou a formar os conglomerados conhecidos como **Chaebols**.
 
 ---
 
-## 2. A Crise Financeira Global e a Maturidade Exportadora (2007-2012)
+## 3. Impactos Econômicos das Crises (Item 3)
 
-### Contexto e o Choque de Demanda Externa
-Em 2008, a Coreia do Sul já era uma economia desenvolvida e integrada às cadeias globais. O choque foi de **demanda externa**, afetando o coração da economia coreana: as exportações ($X$).
+### 3.1. As Crises do Petróleo (1970-1985)
 
-### Impactos Econômicos e Mecânica dos Choques
-*   **Curva IS:** A queda nas exportações netas ($X$) deslocou a curva **IS severamente para a esquerda**. O impacto nas exportações mensais foi um recuo de 40%, abrindo um hiato de produto negativo profundo ($y < y_e$).
-*   **Curva AD:** A queda na demanda mundial deslocou a curva **AD para baixo**. Em um regime de câmbio flutuante, o Won depreciou agressivamente, movendo a economia para a direita ao longo da curva **BT**, amortecendo o colapso.
+#### 3.1.1. Canais de Transmissão e Lado da Oferta
+Como um país totalmente dependente de importações de energia, o choque de 1973 e 1979 atingiu a Coreia via **custos de produção**. A transmissão foi imediata para a base industrial pesada (HCI Drive) que estava sendo construída.
+*   **Valor Adicionado (V.A.):** A Indústria (Ind_VA) sofreu pressões severas de custos, mas o governo manteve o foco na expansão da infraestrutura e química pesada para garantir o produto potencial futuro.
 
-![Evolução Teórica IS-PC-MR: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_evolucao_ISPCMR.png){width=80%}
+![Valor Adicionado por Setor: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_oferta.png){width=85%}
 
-![Evolução Teórica AD-BT-ERU: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_evolucao_ADBTERU.png){width=80%}
+#### 3.1.2. Lado da Demanda
+A demanda foi sustentada artificialmente via **Investimento (I)** massivo. O governo direcionou crédito barato ("Policy Loans") para as Chaebols continuarem seus projetos de siderurgia e construção naval, mesmo com a queda da demanda global por consumo.
+*   **Componentes:** O gráfico de demanda mostra que as exportações (X) e o investimento (I) foram os motores que evitaram um colapso total inicial, embora ao custo de desequilíbrios nominais.
 
-### Resposta de Política e Estabilização
-*   **Política Monetária (MR):** O Banco da Coreia desceu agressivamente pela **curva MR**, cortando juros nominais para **1,25%**.
-*   **Política Fiscal (Governo):** O **Green New Deal (2009)** injetou **50 trilhões de KRW**, deslocando a curva **IS de volta para a direita** (Estado C).
-*   **Ações Estratégicas com as Chaebols:** O governo permitiu que as **Chaebols** aproveitassem a depreciação do câmbio para ganhar mercado global de concorrentes em crise.
+![Componentes da Demanda: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_demanda.png){width=85%}
 
-![Crescimento Comparado: Coreia vs OCDE (2008)](../plots/pt-br/2.%20Crise%20Financeira_benchmark_pib.png){width=85%}
+#### 3.1.3. Desequilíbrios Macroeconômicos e Financeiros
+O impacto mais visível foi a **inflação**, que saltou para **29,2% em 1974**. O déficit em conta corrente explodiu devido ao custo da energia, e a dívida externa cresceu rapidamente para financiar o modelo HCI.
+*   **Juros Reais:** Durante a fase de acomodação, os juros reais foram frequentemente negativos, o que ajudou no financiamento das empresas mas alimentou a espiral inflacionária.
+
+![Política Monetária e Hiato: Crise do Petróleo](../plots/pt-br/1.%20Crise%20do%20Petroleo_monetario.png){width=85%}
+
+#### 3.1.4. Ambiente Institucional e Confiança
+A relação Estado-Chaebol foi o pilar da resiliência. O governo atuava como garantidor de última instância (Decreto de 3 de Agosto). O mercado de trabalho era rigidamente controlado, com o salário real crescendo abaixo da produtividade para garantir a competitividade externa.
+
+### 3.2. A Crise Financeira Global (2007-2012)
+
+#### 3.2.1. Canais de Transmissão e Lado da Demanda
+Em 2008, o choque foi de **demanda externa**. A Coreia já era uma potência exportadora integrada. A queda repentina na renda mundial causou um recuo de 40% nas exportações mensais.
+*   **Consumo (C) e Investimento (I):** Houve uma queda brusca inicial na confiança, mas a resposta fiscal rápida (Green New Deal) substituiu a demanda externa pela demanda pública (G).
+
+![Componentes da Demanda: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_demanda.png){width=85%}
+
+#### 3.2.2. Lado da Oferta e Produção
+A Indústria coreana demonstrou agilidade. Setores de semicondutores e automotivo aproveitaram a crise de concorrentes globais para expandir *market share*. O valor adicionado da indústria recuperou-se em formato de "V" já em 2009.
+
+![Valor Adicionado por Setor: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_oferta.png){width=85%}
+
+#### 3.2.3. Desequilíbrios Macroeconômicos e Financeiros
+A Coreia utilizou a **taxa de câmbio** como principal amortecedor. O Won depreciou de 914 para 1.449 por dólar, restaurando a competitividade das exportações e movendo a economia ao longo da curva BT. Diferente dos anos 70, as contas correntes permaneceram sob controle graças a reservas sólidas.
+
+![Desequilíbrios Macroeconômicos: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_desequilibrios.png){width=85%}
+
+#### 3.2.4. Ambiente Institucional e Confiança
+O Índice de Confiança Empresarial (BCI) recuperou-se rapidamente após os pacotes de estímulo. A estabilidade dos salários reais permitiu que as empresas mantivessem margens durante a fase de depreciação cambial.
+
+![Confiança e Ciclo: Crise de 2008](../plots/pt-br/2.%20Crise%20Financeira_institucional.png){width=85%}
+
+### 3.3. A Pandemia COVID-19 (2019-2024)
+
+#### 3.3.1. Canais de Transmissão e Choque Misto
+A pandemia foi um choque simultâneo: queda no consumo doméstico (isolamento) e ruptura de oferta global (chips e frete).
+*   **Demanda:** O consumo das famílias (C) caiu 6,2% no primeiro trimestre de 2020. No entanto, as exportações tecnológicas (X) cresceram com a demanda global por eletrônicos e trabalho remoto.
+
+![Componentes da Demanda: Pandemia](../plots/pt-br/3.%20Pandemia_demanda.png){width=85%}
+
+#### 3.3.2. Lado da Oferta e Resiliência Setorial
+A Coreia evitou lockdowns totais (Estratégia K-Bangyeok), preservando a produção industrial. O setor de Serviços sofreu, mas foi compensado pelo salto no V.A. da Indústria de Alta Tecnologia.
+
+![Valor Adicionado por Setor: Pandemia](../plots/pt-br/3.%20Pandemia_oferta.png){width=85%}
+
+#### 3.3.3. Desequilíbrios Macroeconômicos e Financeiros
+Houve um salto inédito na **Dívida Pública**, que passou de 37% para quase 50% do PIB devido aos sucessivos orçamentos suplementares. A inflação, contida inicialmente, subiu para 6,3% em 2022 refletindo custos globais.
+
+![Desequilíbrios Macroeconômicos: Pandemia](../plots/pt-br/3.%20Pandemia_desequilibrios.png){width=85%}
+
+#### 3.3.4. Ambiente Institucional e Saúde
+A confiança do consumidor (CCI) foi severamente testada, mas a liderança tecnológica (Samsung, SK) e a gestão eficiente da saúde pública (K-Bangyeok) mantiveram a Coreia como um dos melhores desempenhos da OCDE.
+
+![Indicadores de Saúde e Ciclo: Pandemia](../plots/pt-br/3.%20Pandemia_saude.png){width=85%}
+
+### 3.4. Quadro Atual e Novos Desafios (2022-2025)
+
+#### 3.4.1. Demanda e Inflação Pós-Pandemia
+O cenário atual é de normalização monetária. A inflação retornou gradualmente à meta, mas o alto endividamento das famílias limita o crescimento do consumo (C). As exportações enfrentam a fragmentação das cadeias globais e a guerra tecnológica.
+
+![Inflação Comparada Coreia vs OCDE: Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_benchmark_inflacao.png){width=85%}
+
+#### 3.4.2. Ambiente de Confiança e Dívida Privada
+O grande desequilíbrio atual não é público, mas **privado**. A dívida das famílias coreanas é uma das maiores do mundo em relação ao PIB, tornando a economia extremamente sensível a variações na taxa de juros.
+
+![Confiança e Ciclo: Quadro Atual](../plots/pt-br/4.%20Quadro%20Atual_institucional.png){width=85%}
 
 ---
 
-## 3. A Pandemia COVID-19 e a Resiliência Tecnológica (2019-2024)
+## 4. Ações de Política Econômica (Item 4)
 
-### Contexto e o Choque Misto
-A pandemia representou um choque simultâneo de oferta (cadeias de suprimento) e demanda (isolamento doméstico).
+### 4.1. Política Fiscal
+*   **Anos 70/80:** HCI Drive – Investimento direto do Estado em indústria pesada e química.
+*   **2008:** Green New Deal – Foco em infraestrutura sustentável e estímulo à demanda agregada.
+*   **Pandemia:** Korean New Deal – Estímulo à digitalização e auxílios emergenciais diretos.
 
-### Impactos Econômicos e Mecânica dos Choques
-*   **Curva IS:** O isolamento e a incerteza derrubaram o consumo das famílias, deslocando a curva **IS para a esquerda**.
-*   **Curva PC:** A paralisia global e custos de frete deslocaram a curva **PC para cima**, elevando a inflação para **6,3% em 2022**.
-
-![Evolução Teórica IS-PC-MR: Pandemia](../plots/pt-br/3.%20Pandemia_evolucao_ISPCMR.png){width=80%}
-
-![Evolução Teórica AD-BT-ERU: Pandemia](../plots/pt-br/3.%20Pandemia_evolucao_ADBTERU.png){width=80%}
-
-### Resposta de Política e Estabilização
-*   **Estratégia K-Bangyeok:** Evitou lockdowns profundos, mantendo a curva **PS estável**. O governo injetou recursos em auxílios emergenciais, deslocando a curva **IS de volta para a direita**.
-*   **K-Chips Act:** Créditos fiscais para as Chaebols visando deslocar a **PS para cima** e a **ERU para a direita** estruturalmente.
-*   **Política Monetária (MR):** O BoK elevou a taxa para **2,0% em 2023** para reancorar as expectativas na **Regra Monetária (MR)**.
-
-![Desequilíbrios: Salto na Dívida Pública (Pandemia)](../plots/pt-br/3.%20Pandemia_desequilibrios.png){width=85%}
+### 4.2. Política Monetária
+O Banco da Coreia (BoK) evoluiu para um regime de metas de inflação rigoroso. Em 2008, o corte agressivo de juros foi coordenado com swaps cambiais. Na pandemia, o juro foi a zero, seguido por uma reancoragem preventiva (MR) que colocou a taxa em 2,0% em 2023 para combater o repasse inflacionário.
 
 ---
 
-## 4. Quadro Atual e Novos Desafios (2022-2025)
+## 5. Análise via Modelos Teóricos (Item 5)
 
-### Contexto Pós-Pandemia e Inflação Global
-Após a recuperação da pandemia, a Coreia enfrentou inflação importada e tensões geopolíticas (guerra dos semicondutores).
+### 5.1. O Modelo IS-PC-MR
+A evolução da Coreia pode ser visualizada pelos deslocamentos das curvas:
+*   **Choques de Oferta (Petróleo):** PC desloca para cima. A resposta foi "subir" pela MR com juros altos para quebrar a inércia (Estado C).
+*   **Choques de Demanda (2008):** IS desloca para a esquerda. A resposta foi "descer" pela MR e usar a política fiscal para empurrar a IS de volta (Estado C).
 
-### Evidências dos Dados
-*   **Pico Inflacionário:** A inflação coreana demonstrou resiliência, retornando à meta mais rápido que a média da **OCDE** devido à disciplina da **MR**.
-*   **Sentimento Econômico:** O Índice de Confiança do Consumidor (CCI) e Empresarial (BCI) refletem o peso do alto endividamento das famílias frente aos juros elevados.
+![Evolução Teórica IS-PC-MR: Pandemia](../plots/pt-br/3.%20Pandemia_evolucao_ISPCMR.png){width=85%}
 
-![Confiança vs Ciclo Econômico (Quadro Atual)](../plots/pt-br/4.%20Quadro%20Atual_institucional.png){width=85%}
+### 5.2. O Modelo AD-BT-ERU
+A competitividade coreana reside na gestão do câmbio real ($q$) e na produtividade:
+*   Nas crises, a depreciação de $q$ move a economia para a direita ao longo da curva **BT**.
+*   A política industrial (K-Chips Act) visa deslocar a curva **ERU para a direita**, aumentando o salário real sustentável através da liderança tecnológica.
 
-![Grau de Abertura Comercial de Longo Prazo](../plots/pt-br/longo_prazo_abertura.png){width=85%}
-
----
-
-## Síntese Conclusiva
-
-A Coreia do Sul evoluiu de um modelo de crescimento forçado nos anos 70 para uma economia de alta tecnologia resiliente. A chave do sucesso coreano reside na agilidade institucional para adaptar a política macroeconômica às mudanças globais, mantendo a competitividade de suas curvas **PS e ERU** através da inovação tecnológica constante e da coordenação Estado-Chaebol.
-
-| Crise | Natureza do Choque | Resposta Principal | Papel do Estado/Chaebols |
-| :--- | :--- | :--- | :--- |
-| **Anos 70/80** | Oferta (Energia) | Juros Altos + Estabilização | Estado "Diretor" (HCI Drive) |
-| **2008** | Demanda (Externa) | Câmbio Flexível + Fiscal | Estado "Facilitador" (Green Growth) |
-| **2020** | Misto (Saúde/Global) | Integração Saúde + Inovação | Estado "Sócio" (K-New Deal) |
-| **Atual (2022-25)** | Oferta/Geopolítica | Reancoragem + Diversificação | Soberania Digital (K-Chips Act) |
+![Evolução Teórica AD-BT-ERU: 2008](../plots/pt-br/2.%20Crise%20Financeira_evolucao_ADBTERU.png){width=85%}
 
 ---
-*Relatório de Macroeconomia (2026.1). Fontes: FRED, Banco Mundial (WDI), BoK, OCDE.*
+
+## 6. Desempenho Após as Crises
+A Coreia do Sul demonstrou recuperações em "V" em quase todos os episódios. Após 1980, consolidou a indústria pesada; após 2008, dominou o mercado de eletrônicos; após 2020, emergiu como líder na transição para veículos elétricos e biotecnologia.
+
+## 7. Lições das Crises
+1.  **Flexibilidade Cambial:** Atuou como amortecedor vital em 2008 e 2020.
+2.  **Coordenação Institucional:** A agilidade na resposta fiscal e monetária conjunta é o diferencial coreano.
+3.  **Investimento em Oferta:** Nunca negligenciar o lado da produtividade (PS/ERU) mesmo em crises de demanda.
+
+## 8. Conclusão
+A análise das crises revela que a Coreia do Sul não apenas sobreviveu aos choques, mas os utilizou para reestruturar sua base produtiva. A transição de um modelo de custos baixos para um de alta tecnologia permitiu que o país mantivesse sua resiliência exportadora, embora os desafios da dívida privada e da demografia exijam novas rodadas de inovação institucional.
+
+---
+*Relatório Macroeconômico (2026.1). Fontes: FRED, Banco Mundial (WDI), Bank of Korea (BoK), OCDE.*
