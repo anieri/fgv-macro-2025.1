@@ -34,9 +34,19 @@ def calculate_derived_variables(df):
     if 'Exp_GDP' in df.columns and 'Imp_GDP' in df.columns:
         df['Trade_Openness'] = df['Exp_GDP'] + df['Imp_GDP']
     
-    # 4. Crescimento PIB Real KOR (YoY)
-    if 'Real_GDP_Q' in df.columns:
-        df['KOR_GDP_Growth'] = df['Real_GDP_Q'].pct_change(periods=4, fill_method=None) * 100
+    # 5. Dívida como % do PIB (BOK)
+    # Public_Debt_KRW_Billion / (Real_GDP_Q * 4 * (CPI_Index_KOR/100) / 1000)
+    # Note: Real_GDP_Q is in Million KRW. 4 * Q is Annual Million. / 1000 is Billion.
+    if 'Public_Debt_KRW_Billion' in df.columns and 'Real_GDP_Q' in df.columns and 'CPI_Index_KOR' in df.columns:
+        nominal_gdp_annual_billion = (df['Real_GDP_Q'] * 4 * (df['CPI_Index_KOR'] / 100)) / 1000
+        df['BOK_Gov_Debt_GDP'] = (df['Public_Debt_KRW_Billion'] / nominal_gdp_annual_billion) * 100
+        
+    # 6. Dívida Externa como % do PIB
+    # External_Debt_USD_Million / (Nominal_GDP_KRW_Billion / Exchange_Rate * 1000)
+    if 'External_Debt_USD_Million' in df.columns and 'Exchange_Rate' in df.columns:
+        # We need Nominal GDP in USD Million
+        nominal_gdp_usd_million = (nominal_gdp_annual_billion * 1000) / df['Exchange_Rate']
+        df['BOK_External_Debt_GDP'] = (df['External_Debt_USD_Million'] / nominal_gdp_usd_million) * 100
 
     return df
 
@@ -45,15 +55,27 @@ def run_analysis():
     
     # 1. Carregar Dados
     loader = SocioEconomicDataLoader()
-    data_file = 'data/south_korea_comprehensive.csv'
+    df = loader.get_full_dataset()
     
-    if not os.path.exists(data_file):
-        df = loader.get_full_dataset()
-    else:
-        # We re-run loader.get_full_dataset() if we need new columns, 
-        # but for safety I'll let the user decide. 
-        # Actually I'll force refresh since I just added new columns.
-        df = loader.get_full_dataset()
+    # Merge com dados do BOK (Dívida)
+    bok_path = 'data/bok_debt_history.csv'
+    if os.path.exists(bok_path):
+        print("Integrando dados do BOK...")
+        bok_df = pd.read_csv(bok_path)
+        # BOK data has 'Year' column or we derive it
+        bok_df['Year'] = pd.to_datetime(bok_df['Date']).dt.year
+        
+        # Preserve original index
+        original_index = df.index
+        df['Year'] = df.index.year
+        
+        # Merge
+        df = pd.merge(df, bok_df[['Year', 'Public_Debt_KRW_Billion', 'External_Debt_USD_Million']], 
+                      on='Year', how='left')
+        
+        # Restore index
+        df.index = original_index
+        df.drop(columns=['Year'], inplace=True)
     
     # 2. Calcular Variáveis
     print("Calculando Variáveis Derivadas...")

@@ -102,18 +102,16 @@ class MacroVisualizer:
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
-    def plot_macro_imbalances(self, df, title, filename, source="Banco Mundial (WDI)", period_label=None):
+    def plot_macro_imbalances(self, df, title, filename, source="BOK e WDI", period_label=None):
         """Gráfico especializado para Desequilíbrios: Dívida e Conta Corrente."""
         fig, ax = plt.subplots(figsize=(12, 6))
         plt.axhline(0, color='black', linestyle='-', linewidth=1.2, alpha=0.5)
 
-        cols = ['Gov_Debt_GDP', 'Current_Account_GDP', 'Private_Credit_GDP']
-        for col in cols:
-            if col in df.columns:
-                valid_data = df[col].dropna()
-                if not valid_data.empty:
-                    ax.plot(valid_data.index, valid_data.values, label=self._translate_col(col), 
-                             marker='o', markersize=4)
+        cols = ['BOK_Gov_Debt_GDP', 'Current_Account_GDP', 'Private_Credit_GDP']
+        # Fallback
+        if 'BOK_Gov_Debt_GDP' not in df.columns or df['BOK_Gov_Debt_GDP'].dropna().empty:
+             if 'Gov_Debt_GDP' in df.columns:
+                 cols[0] = 'Gov_Debt_GDP'
 
         ax.set_title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
         ax.set_ylabel("Percentual do PIB (%)")
@@ -230,12 +228,22 @@ class MacroVisualizer:
         plt.savefig(f"{self.output_dir}/{filename}")
         plt.close()
 
-    def plot_debt_structure(self, df, title, filename, source="Banco Mundial (WDI)", period_label=None):
+    def plot_debt_structure(self, df, title, filename, source="BOK e Cálculos Próprios", period_label=None):
         """Gráfico de Estrutura de Dívida (Pública, Privada, Externa)."""
         plt.figure(figsize=(12, 6))
         plt.axhline(0, color='black', linestyle='-', linewidth=1.2, alpha=0.5)
         
-        cols = ['Gov_Debt_GDP', 'Private_Credit_GDP', 'External_Debt_GNI']
+        # Use BOK columns if they exist, otherwise fallback to WDI
+        cols = ['BOK_Gov_Debt_GDP', 'Private_Credit_GDP', 'BOK_External_Debt_GDP']
+        
+        # Add original columns as fallback in case BOK fails for some years
+        if 'BOK_Gov_Debt_GDP' not in df.columns or df['BOK_Gov_Debt_GDP'].dropna().empty:
+             if 'Gov_Debt_GDP' in df.columns:
+                 cols[0] = 'Gov_Debt_GDP'
+        if 'BOK_External_Debt_GDP' not in df.columns or df['BOK_External_Debt_GDP'].dropna().empty:
+             if 'External_Debt_GNI' in df.columns:
+                 cols[2] = 'External_Debt_GNI'
+
         has_labels = False
         for col in cols:
             if col in df.columns:
@@ -258,6 +266,8 @@ class MacroVisualizer:
 
     def _translate_col(self, col):
         translations = {
+            'BOK_Gov_Debt_GDP': 'Dívida Pública (% PIB)',
+            'BOK_External_Debt_GDP': 'Dívida Externa (% PIB)',
             'CPI_YoY': 'Inflação (YoY %)',
             'Unemployment': 'Taxa de Desemprego (%)',
             'Real_GDP_Q': 'PIB Real (Trimestral)',
@@ -411,7 +421,7 @@ class MacroVisualizer:
             ax1.annotate('', xy=points_pc_mr['C'], xytext=points_pc_mr['B'], arrowprops=dict(arrowstyle="->", color='darkblue', lw=2, alpha=0.6))
 
         ax1.axvline(model.y_e, color='black', linestyle=':', alpha=0.5)
-        ax1.set_ylabel('Inflação (π %)')
+        ax1.set_ylabel('Inflação (pi %)')
         ax1.set_ylim(pi_lim)
         ax1.set_title('Evolução Teórica: Diagrama PC-MR', fontsize=14, fontweight='bold')
 
