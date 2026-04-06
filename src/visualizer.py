@@ -48,6 +48,10 @@ class MacroVisualizer:
     def plot_time_series(self, df, columns, title, ylabel, filename, source="FRED", period_label=None):
         """Plota séries temporais simples com tradução e escala legível."""
         plt.figure(figsize=(12, 6))
+        
+        # Linha em zero em evidência (especialmente útil para o Hiato do Produto)
+        plt.axhline(0, color='black', linestyle='-', linewidth=1.5, alpha=0.6, zorder=1)
+        
         all_values = []
         for col in columns:
             if col in df.columns:
