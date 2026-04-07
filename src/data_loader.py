@@ -5,7 +5,7 @@ import datetime
 import os
 
 class SocioEconomicDataLoader:
-    def __init__(self, start_year=1960, end_year=2024):
+    def __init__(self, start_year=1960, end_year=2025):
         self.start = datetime.datetime(start_year, 1, 1)
         self.end = datetime.datetime(end_year, 12, 31)
         self.country_code = 'KOR'

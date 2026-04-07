@@ -50,7 +50,7 @@ class BOKDataFetcher:
     def get_public_debt_annual(self):
         """102Y004: Central Government Debt (Annual)"""
         # Code 0001 is Total
-        df = self.fetch_series("102Y004", "A", "1970", "2024", "0001")
+        df = self.fetch_series("102Y004", "A", "1970", "2025", "0001")
         if not df.empty:
             df.columns = ['Date', 'Public_Debt_KRW_Billion']
         return df
@@ -58,7 +58,7 @@ class BOKDataFetcher:
     def get_external_debt_annual(self):
         """802Y001: Gross External Debt (Annual)"""
         # Code 10101 is Total External Debt
-        df = self.fetch_series("802Y001", "A", "1994", "2024", "10101")
+        df = self.fetch_series("802Y001", "A", "1994", "2025", "10101")
         if not df.empty:
             df.columns = ['Date', 'External_Debt_USD_Million']
         return df
@@ -66,9 +66,30 @@ class BOKDataFetcher:
     def get_exchange_rate_monthly(self):
         """036Y001: Exchange Rates (Monthly) - Won/US Dollar (0000001)"""
         # Note: 0000001 is Won/US Dollar (End of Period)
-        df = self.fetch_series("036Y001", "M", "196401", "202412", "0000001")
+        df = self.fetch_series("036Y001", "M", "196401", "202512", "0000001")
         if not df.empty:
             df.columns = ['Date', 'Exchange_Rate_BOK']
+        return df
+
+    def get_cpi_monthly(self):
+        """901Y009: Consumer Price Index (Monthly) - All Items (0)"""
+        df = self.fetch_series("901Y009", "M", "197001", "202512", "0")
+        if not df.empty:
+            df.columns = ['Date', 'CPI_Index_KOR_BOK']
+        return df
+
+    def get_base_rate_monthly(self):
+        """722Y001: Interest Rates - Base Rate (0101000)"""
+        df = self.fetch_series("722Y001", "M", "199901", "202512", "0101000")
+        if not df.empty:
+            df.columns = ['Date', 'Policy_Rate_BOK']
+        return df
+
+    def get_real_gdp_quarterly(self):
+        """200Y005: National Accounts - Real GDP Seasonally Adjusted (11201)"""
+        df = self.fetch_series("200Y005", "Q", "19701", "20254", "11201")
+        if not df.empty:
+            df.columns = ['Date', 'Real_GDP_Q_BOK']
         return df
 
     def get_historical_fallback_debt(self):
@@ -89,7 +110,8 @@ class BOKDataFetcher:
             '2005': 187880, '2006': 260010, '2007': 383150, '2008': 317350, '2009': 345390,
             '2010': 359410, '2011': 398380, '2012': 413340, '2013': 440650, '2014': 423750,
             '2015': 395060, '2016': 383920, '2017': 418790, '2018': 440620, '2019': 467020,
-            '2020': 544860, '2021': 628100, '2022': 662580, '2023': 663600, '2024': 675000
+            '2020': 544860, '2021': 628100, '2022': 662580, '2023': 663600, '2024': 675000,
+            '2025': 685000  # Estimate
         }
         
         # Central Govt Debt (Billion KRW) - Expanded series
@@ -104,7 +126,8 @@ class BOKDataFetcher:
             '2005': 248100, '2006': 282700, '2007': 299200, '2008': 309000, '2009': 359600,
             '2010': 392200, '2011': 420500, '2012': 443100, '2013': 489800, '2014': 533200,
             '2015': 591500, '2016': 626900, '2017': 660200, '2018': 680500, '2019': 723200,
-            '2020': 846600, '2021': 970700, '2022': 1067300, '2023': 1126700, '2024': 1195800
+            '2020': 846600, '2021': 970700, '2022': 1067300, '2023': 1126700, '2024': 1195800,
+            '2025': 1250000 # Estimate
         }
 
         # Historical Exchange Rate Won/USD (Average for fallback)
@@ -133,6 +156,9 @@ def consolidate_and_merge():
     api_pub = fetcher.get_public_debt_annual()
     api_ext = fetcher.get_external_debt_annual()
     api_fx = fetcher.get_exchange_rate_monthly()
+    api_cpi = fetcher.get_cpi_monthly()
+    api_rate = fetcher.get_base_rate_monthly()
+    api_gdp = fetcher.get_real_gdp_quarterly()
     
     # Get historical fallback
     hist_pub, hist_ext, hist_fx = fetcher.get_historical_fallback_debt()
@@ -151,10 +177,6 @@ def consolidate_and_merge():
         
     # Combine both debt series and exchange rate
     debt_df = pd.merge(pub_debt, ext_debt, on='Date', how='outer').sort_values('Date')
-    
-    # Add Exchange Rate to debt_df if available
-    # Since api_fx is monthly and debt_df is annual (mostly), we merge on Year
-    # But wait, api_fx is monthly. Let's make debt_df annual for simplicity and consistency.
     debt_df['Year'] = debt_df['Date'].dt.year
     
     # Create annual FX series from api_fx and hist_fx
@@ -182,8 +204,7 @@ def consolidate_and_merge():
             master.rename(columns={master.columns[0]: 'Date'}, inplace=True)
         master['Date'] = pd.to_datetime(master['Date'])
         
-        # Merge Debt
-        debt_df['Year'] = debt_df['Date'].dt.year
+        # Merge Debt and FX from debt_df (Annual/Historical)
         master['Year'] = master['Date'].dt.year
         for col in ['Public_Debt_KRW_Billion', 'External_Debt_USD_Million']:
             if col in master.columns:
@@ -191,31 +212,44 @@ def consolidate_and_merge():
         master = pd.merge(master, debt_df[['Year', 'Public_Debt_KRW_Billion', 'External_Debt_USD_Million']], 
                           on='Year', how='left')
         
-        # Merge Exchange Rate
-        # First check API (Monthly)
-        if not api_fx.empty:
-            if 'Exchange_Rate_BOK' in master.columns:
-                master.drop(columns=['Exchange_Rate_BOK'], inplace=True)
-            master = pd.merge(master, api_fx, on='Date', how='left')
-        
-        # Then Fallback (Annual) for the 70s
-        hist_fx['Year'] = hist_fx['Date'].dt.year
-        master = pd.merge(master, hist_fx[['Year', 'Exchange_Rate_BOK_Fallback']], on='Year', how='left')
-        
-        # Combine: API Monthly > Fallback Annual
-        if 'Exchange_Rate_BOK' in master.columns:
-            master['Exchange_Rate_BOK'] = master['Exchange_Rate_BOK'].fillna(master['Exchange_Rate_BOK_Fallback'])
-        else:
-            master['Exchange_Rate_BOK'] = master['Exchange_Rate_BOK_Fallback']
+        # Merge high-frequency BOK data
+        api_data = [api_fx, api_cpi, api_rate, api_gdp]
+        for df in api_data:
+            if not df.empty:
+                col_name = [c for col in [df.columns] for c in col if c != 'Date'][0]
+                if col_name in master.columns:
+                    master.drop(columns=[col_name], inplace=True)
+                master = pd.merge(master, df, on='Date', how='left')
 
-        # Fill missing FRED Exchange_Rate with BOK values
-        if 'Exchange_Rate' in master.columns:
-            master['Exchange_Rate'] = master['Exchange_Rate'].fillna(master['Exchange_Rate_BOK'])
+        # Fill missing FRED values with BOK values
+        mappings = {
+            'Exchange_Rate': 'Exchange_Rate_BOK',
+            'CPI_Index_KOR': 'CPI_Index_KOR_BOK',
+            'Policy_Rate': 'Policy_Rate_BOK',
+            'Real_GDP_Q': 'Real_GDP_Q_BOK'
+        }
         
-        # Cleanup
-        master.drop(columns=['Year', 'Exchange_Rate_BOK_Fallback'], inplace=True)
-        master.to_csv(master_path, index=False)
-        print(f"Updated {master_path} with BOK debt and exchange rate data.")
+        for fred_col, bok_col in mappings.items():
+            if fred_col in master.columns and bok_col in master.columns:
+                master[fred_col] = master[fred_col].fillna(master[bok_col])
+        
+        # Calculate CPI_YoY if missing but CPI_Index_KOR is present
+        if 'CPI_Index_KOR' in master.columns:
+            master['CPI_YoY_BOK'] = master['CPI_Index_KOR'].pct_change(12) * 100
+            master['CPI_YoY'] = master['CPI_YoY'].fillna(master['CPI_YoY_BOK'])
+
+    # Combined high-frequency BOK data for master integration
+    high_freq_df = pd.DataFrame({'Date': master['Date']})
+    for df in [api_fx, api_cpi, api_rate, api_gdp]:
+        if not df.empty:
+            high_freq_df = pd.merge(high_freq_df, df, on='Date', how='left')
+    
+    high_freq_df.to_csv('data/bok_macro_extra.csv', index=False)
+    print("BOK high-frequency data saved to data/bok_macro_extra.csv")
+
+    # Cleanup and save master
+    master.to_csv(master_path, index=False)
+
 
 
 if __name__ == "__main__":

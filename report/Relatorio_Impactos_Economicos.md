@@ -10,7 +10,7 @@ header-includes:
 
 ## 1. Introdução
 
-Este relatório tem como objetivo realizar uma análise profunda e técnica da trajetória macroeconômica da Coreia do Sul entre 1970 e 2025, focando em sua capacidade de resiliência e adaptação estrutural frente a três grandes choques globais: as Crises do Petróleo (1973 e 1979), a Crise Financeira Global de 2008 e a Pandemia de COVID-19. 
+Este relatório tem como objetivo realizar uma análise profunda e técnica da trajetória macroeconômica da Coreia do Sul entre 1970 e 2025, focando em sua capacidade de resiliência e adaptação estrutural frente a três grandes choques globais: as Crises do Petróleo (1973 e 1979), a Crise Financeira Global de 2008 e a Pandemia de COVID-19 (2019-2024). 
 
 A escolha da Coreia do Sul como objeto de estudo justifica-se por sua transição sem precedentes de uma economia agrária e devastada pela guerra para uma potência tecnológica global em menos de cinco décadas — fenômeno conhecido como o "Milagre do Rio Han". Diferente de muitas economias emergentes que sofreram décadas perdidas após choques externos, a Coreia utilizou as crises como janelas de oportunidade para reconfigurar seu modelo de oferta e fortalecer suas instituições.
 

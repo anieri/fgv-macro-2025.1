@@ -82,7 +82,43 @@ def run_analysis():
         # Restore index
         df.index = original_index
         df.drop(columns=['Year'], inplace=True)
-    
+
+    # 1.1. Integrar dados de alta frequência do BOK (2025 coverage)
+    extra_path = 'data/bok_macro_extra.csv'
+    if os.path.exists(extra_path):
+        print("Integrando dados extras do BOK (Alta Frequência)...")
+        extra_df = pd.read_csv(extra_path)
+        extra_df['Date'] = pd.to_datetime(extra_df['Date'])
+        
+        # Merge on Date index
+        df = df.reset_index()
+        if 'Date' not in df.columns: # happened in some versions
+             df.rename(columns={df.columns[0]: 'Date'}, inplace=True)
+        df['Date'] = pd.to_datetime(df['Date'])
+        
+        df = pd.merge(df, extra_df, on='Date', how='left')
+        
+        # Fill gaps
+        mappings = {
+            'Exchange_Rate': 'Exchange_Rate_BOK',
+            'CPI_Index_KOR': 'CPI_Index_KOR_BOK',
+            'Policy_Rate': 'Policy_Rate_BOK',
+            'Real_GDP_Q': 'Real_GDP_Q_BOK'
+        }
+        for fred_col, bok_col in mappings.items():
+            if fred_col in df.columns and bok_col in df.columns:
+                df[fred_col] = df[fred_col].fillna(df[bok_col])
+        
+        # Recalculate CPI_YoY if missing
+        if 'CPI_Index_KOR' in df.columns:
+            df['CPI_YoY'] = df['CPI_YoY'].fillna(df['CPI_Index_KOR'].pct_change(12) * 100)
+
+        # Drop temporary BOK columns
+        cols_to_drop = [c for c in mappings.values() if c in df.columns]
+        df.drop(columns=cols_to_drop, inplace=True)
+        
+        df.set_index('Date', inplace=True)
+
     # 2. Calcular Variáveis
     print("Calculando Variáveis Derivadas...")
     df['Output_Gap'] = calculate_output_gap(df)
@@ -100,8 +136,8 @@ def run_analysis():
         '1. Crise do Petroleo': ('1970-01-01', '1985-12-31', '1. Crise do Petróleo (1970-1985)'),
         'Crise_Asiatica': ('1995-01-01', '2002-12-31', 'Crise Asiática (1995-2002)'),
         '2. Crise Financeira': ('2007-01-01', '2012-12-31', '2. Crise Financeira Global (2007-2012)'),
-        '3. Pandemia': ('2019-01-01', '2024-12-31', '3. Pandemia COVID-19 (2019-2024)'),
-        '4. Quadro Atual': ('2022-01-01', '2024-12-31', '4. Quadro Atual (2022-2024)')
+        '3. Pandemia': ('2019-10-01', '2024-03-31', '3. Pandemia COVID-19 (2019-2024)'),
+        '4. Quadro Atual': ('2022-01-01', '2025-12-31', '4. Quadro Atual (2022-2025)')
     }
 
     # Gráfico de Longo Prazo: Grau de Abertura
