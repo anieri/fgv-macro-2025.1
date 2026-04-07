@@ -57,21 +57,27 @@ def run_analysis():
     loader = SocioEconomicDataLoader()
     df = loader.get_full_dataset()
     
-    # Merge com dados do BOK (Dívida)
+    # Merge com dados do BOK (Dívida e Câmbio Histórico)
     bok_path = 'data/bok_debt_history.csv'
     if os.path.exists(bok_path):
         print("Integrando dados do BOK...")
         bok_df = pd.read_csv(bok_path)
-        # BOK data has 'Year' column or we derive it
         bok_df['Year'] = pd.to_datetime(bok_df['Date']).dt.year
         
         # Preserve original index
         original_index = df.index
         df['Year'] = df.index.year
         
-        # Merge
-        df = pd.merge(df, bok_df[['Year', 'Public_Debt_KRW_Billion', 'External_Debt_USD_Million']], 
-                      on='Year', how='left')
+        # Merge - Add BOK FX as well if available
+        merge_cols = ['Year', 'Public_Debt_KRW_Billion', 'External_Debt_USD_Million']
+        if 'Exchange_Rate_BOK' in bok_df.columns:
+            merge_cols.append('Exchange_Rate_BOK')
+        
+        df = pd.merge(df, bok_df[merge_cols], on='Year', how='left')
+        
+        # Fill FRED exchange rate gaps with BOK historical rates
+        if 'Exchange_Rate_BOK' in df.columns:
+            df['Exchange_Rate'] = df['Exchange_Rate'].fillna(df['Exchange_Rate_BOK'])
         
         # Restore index
         df.index = original_index

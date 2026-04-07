@@ -63,6 +63,14 @@ class BOKDataFetcher:
             df.columns = ['Date', 'External_Debt_USD_Million']
         return df
 
+    def get_exchange_rate_monthly(self):
+        """036Y001: Exchange Rates (Monthly) - Won/US Dollar (0000001)"""
+        # Note: 0000001 is Won/US Dollar (End of Period)
+        df = self.fetch_series("036Y001", "M", "196401", "202412", "0000001")
+        if not df.empty:
+            df.columns = ['Date', 'Exchange_Rate_BOK']
+        return df
+
     def get_historical_fallback_debt(self):
         """
         Fallback for periods where API is unavailable or series start late.
@@ -98,14 +106,25 @@ class BOKDataFetcher:
             '2015': 591500, '2016': 626900, '2017': 660200, '2018': 680500, '2019': 723200,
             '2020': 846600, '2021': 970700, '2022': 1067300, '2023': 1126700, '2024': 1195800
         }
+
+        # Historical Exchange Rate Won/USD (Average for fallback)
+        # Source: BOK Historical Statistics
+        fx_rate = {
+            '1970': 310.6, '1971': 347.5, '1972': 392.4, '1973': 396.1, '1974': 404.5,
+            '1975': 484.0, '1976': 484.0, '1977': 484.0, '1978': 484.0, '1979': 484.0,
+            '1980': 607.4, '1981': 681.1
+        }
         
         ext_df = pd.DataFrame(list(external_debt.items()), columns=['Year', 'External_Debt_USD_Million'])
         ext_df['Date'] = pd.to_datetime(ext_df['Year'], format='%Y')
         
         pub_df = pd.DataFrame(list(public_debt.items()), columns=['Year', 'Public_Debt_KRW_Billion'])
         pub_df['Date'] = pd.to_datetime(pub_df['Year'], format='%Y')
+
+        fx_df = pd.DataFrame(list(fx_rate.items()), columns=['Year', 'Exchange_Rate_BOK_Fallback'])
+        fx_df['Date'] = pd.to_datetime(fx_df['Year'], format='%Y')
         
-        return pub_df[['Date', 'Public_Debt_KRW_Billion']], ext_df[['Date', 'External_Debt_USD_Million']]
+        return pub_df[['Date', 'Public_Debt_KRW_Billion']], ext_df[['Date', 'External_Debt_USD_Million']], fx_df[['Date', 'Exchange_Rate_BOK_Fallback']]
 
 def consolidate_and_merge():
     fetcher = BOKDataFetcher()
@@ -113,9 +132,10 @@ def consolidate_and_merge():
     # Try fetching from API
     api_pub = fetcher.get_public_debt_annual()
     api_ext = fetcher.get_external_debt_annual()
+    api_fx = fetcher.get_exchange_rate_monthly()
     
     # Get historical fallback
-    hist_pub, hist_ext = fetcher.get_historical_fallback_debt()
+    hist_pub, hist_ext, hist_fx = fetcher.get_historical_fallback_debt()
     
     # Merge Public Debt (API takes priority)
     if not api_pub.empty:
@@ -129,51 +149,74 @@ def consolidate_and_merge():
     else:
         ext_debt = hist_ext
         
-    # Combine both
+    # Combine both debt series and exchange rate
     debt_df = pd.merge(pub_debt, ext_debt, on='Date', how='outer').sort_values('Date')
+    
+    # Add Exchange Rate to debt_df if available
+    # Since api_fx is monthly and debt_df is annual (mostly), we merge on Year
+    # But wait, api_fx is monthly. Let's make debt_df annual for simplicity and consistency.
+    debt_df['Year'] = debt_df['Date'].dt.year
+    
+    # Create annual FX series from api_fx and hist_fx
+    hist_fx['Year'] = hist_fx['Date'].dt.year
+    if not api_fx.empty:
+        api_fx['Year'] = api_fx['Date'].dt.year
+        annual_fx = api_fx.groupby('Year')['Exchange_Rate_BOK'].mean().reset_index()
+        fx_combined = pd.merge(hist_fx[['Year', 'Exchange_Rate_BOK_Fallback']], annual_fx, on='Year', how='outer')
+        fx_combined['Exchange_Rate_BOK'] = fx_combined['Exchange_Rate_BOK'].fillna(fx_combined['Exchange_Rate_BOK_Fallback'])
+    else:
+        fx_combined = hist_fx.rename(columns={'Exchange_Rate_BOK_Fallback': 'Exchange_Rate_BOK'})
+    
+    debt_df = pd.merge(debt_df, fx_combined[['Year', 'Exchange_Rate_BOK']], on='Year', how='left')
     
     # Save to CSV
     os.makedirs('data', exist_ok=True)
-    debt_df.to_csv('data/bok_debt_history.csv', index=False)
-    print("BOK debt data saved to data/bok_debt_history.csv")
+    debt_df.drop(columns=['Year']).to_csv('data/bok_debt_history.csv', index=False)
+    print("BOK debt and FX data saved to data/bok_debt_history.csv")
     
     # Integration with master dataset
     master_path = 'data/south_korea_comprehensive_final.csv'
     if os.path.exists(master_path):
-        # Read the CSV, the first column is the date and has no name
         master = pd.read_csv(master_path)
-        
-        # Rename the first column to 'Date' if it has no name or is unnamed
         if master.columns[0] == '' or 'Unnamed' in master.columns[0]:
             master.rename(columns={master.columns[0]: 'Date'}, inplace=True)
-            
         master['Date'] = pd.to_datetime(master['Date'])
         
-        # Merge - we need to handle frequencies. 
-        # Since BOK debt is annual, we forward fill for monthly/quarterly analysis.
+        # Merge Debt
         debt_df['Year'] = debt_df['Date'].dt.year
         master['Year'] = master['Date'].dt.year
-        
-        # Drop year if it existed in master (unlikely, but safe)
-        if 'Year' in master.columns[:-1]: # avoid dropping the one we just added
-            # If there's an old year column, drop it
-             pass
-
-        # Perform merge
-        # Drop columns if they already exist from a previous failed run
         for col in ['Public_Debt_KRW_Billion', 'External_Debt_USD_Million']:
             if col in master.columns:
                 master.drop(columns=[col], inplace=True)
-
         master = pd.merge(master, debt_df[['Year', 'Public_Debt_KRW_Billion', 'External_Debt_USD_Million']], 
                           on='Year', how='left')
         
-        # Cleanup
-        master.drop(columns=['Year'], inplace=True)
+        # Merge Exchange Rate
+        # First check API (Monthly)
+        if not api_fx.empty:
+            if 'Exchange_Rate_BOK' in master.columns:
+                master.drop(columns=['Exchange_Rate_BOK'], inplace=True)
+            master = pd.merge(master, api_fx, on='Date', how='left')
         
-        # Save back, ensuring we don't add a new index column if we already have one
+        # Then Fallback (Annual) for the 70s
+        hist_fx['Year'] = hist_fx['Date'].dt.year
+        master = pd.merge(master, hist_fx[['Year', 'Exchange_Rate_BOK_Fallback']], on='Year', how='left')
+        
+        # Combine: API Monthly > Fallback Annual
+        if 'Exchange_Rate_BOK' in master.columns:
+            master['Exchange_Rate_BOK'] = master['Exchange_Rate_BOK'].fillna(master['Exchange_Rate_BOK_Fallback'])
+        else:
+            master['Exchange_Rate_BOK'] = master['Exchange_Rate_BOK_Fallback']
+
+        # Fill missing FRED Exchange_Rate with BOK values
+        if 'Exchange_Rate' in master.columns:
+            master['Exchange_Rate'] = master['Exchange_Rate'].fillna(master['Exchange_Rate_BOK'])
+        
+        # Cleanup
+        master.drop(columns=['Year', 'Exchange_Rate_BOK_Fallback'], inplace=True)
         master.to_csv(master_path, index=False)
-        print(f"Updated {master_path} with BOK debt data.")
+        print(f"Updated {master_path} with BOK debt and exchange rate data.")
+
 
 if __name__ == "__main__":
     consolidate_and_merge()
