@@ -225,8 +225,8 @@ def run_analysis():
                 }
                 states_ad_bt_eru = {
                     'A': {},
-                    'B': {'bt_shift': 0.5}, # Piora na balança comercial
-                    'C': {'bt_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
+                    'B': {'bt_shift': 0.5, 'ad_shift': 0.5}, # Piora na balança comercial
+                    'C': {'bt_shift': 0.5, 'ad_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
                 }
             elif "2008" in key:
                 states_is_pc_mr = {

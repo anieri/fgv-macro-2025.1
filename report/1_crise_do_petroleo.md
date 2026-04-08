@@ -32,3 +32,21 @@ A gestão das crises do petróleo provou a capacidade de coordenação do Estado
 *   `1. Crise do Petroleo_evolucao_ISPCMR.png` (Trajetória A → B → C)
 *   `1. Crise do Petroleo_monetario.png` (Juros Reais e Inflação)
 *   `1. Crise do Petroleo_desequilibrios.png` (Dívida e Conta Corrente)
+
+# 5. Pontos de Política Economica
+
+O governo manteve o investimento (I) alto via subsídios e crédito direcionado às Chaebols, para preservar a capacidade industrial.
+
+Após 1980, o Banco da Coreia (BoK) elevou os juros nominais para 21% (Estado C), para quebrar a inércia inflacionária.
+
+O ambiente institucional era marcado pela “Repressão Financeira” e pelo controle estatal do crédito. A confiança era garantida pelo Estado, que atuava como segurador de última instância das Chaebols. O mercado de trabalho era rígido, com sindicatos controlados, o que permitia que o salário real crescesse abaixo da produtividade.
+
+A Indústria sofreu pressões severas de custos, mas o governo Park Chung-hee manteve o foco na expansão da infraestrutura. A estratégia era “crescer para pagar a dívida”, o que evitou uma recessão prolongada mas alimentou a inflação.
+
+A demanda agregada foi sustentada artificialmente via Investimento (I) massivo e direcionado. O governo utilizou os “Policy Loans” — créditos com juros subsidiados — para canalizar recursos para as Chaebols. Isso permitiu que a formação bruta de capital fixo continuasse a crescer mesmo em um cenário global adverso.
+
+As exportações (X) tornaram-se o canal de saída. A Coreia aproveitou o boom de construção no Oriente Médio (petrodólares) para exportar serviços de engenharia e construção civil, compensando parte do déficit comercial de energia.
+
+Durante a fase de acomodação (1974-1978), os juros reais foram frequentemente negativos (i < π), o que na prática significou uma transferência de renda dos poupadores para os grandes conglomerados (Chaebols), facilitando o investimento mas prejudicando a estabilidade monetária de longo prazo.
+
+A Coreia utilizou desvalorizações agressivas do Won para manter a competitividade das exportações frente ao choque de custos. Após o segundo choque (1979) e o assassinato de Park Chung-hee, o país entrou em um programa de estabilização rigoroso (1980), onde o câmbio nominal foi drasticamente ajustado e os juros foram elevados para atrair capital e conter a inflação.
