@@ -233,7 +233,7 @@ def run_analysis():
                 is_pc_mr.pi_T = 3.0
                 states_is_pc_mr = {
                     'A': {'pi_lagged': 3.0, 'y_e': 100.0, 'pi_T': 3.0},
-                    'B': {'y_override': 96.0, 'pi_override': 3.0 + 1.2*(96.0-100.0), 'is_shift': -8.0, 'y_e': 100.0, 'pi_T': 3.0},
+                    'B': {'y_override': 96.0, 'pi_override': 3.0 + 1.2*(96.0-100.0), 'is_shift': -4.0, 'y_e': 100.0, 'pi_T': 3.0}, # Choque de demanda, horizontal em r=2
                     'C': {'pi_lagged': 2.0, 'y_e': 103.0, 'pi_T': 2.0, 'is_shift': 5.0} 
                 }
 
@@ -244,15 +244,16 @@ def run_analysis():
                     'C': {} # Volta à condição inicial (igual a A)
                 }
             elif "Pandemia" in key:
+                is_pc_mr.pi_T = 2.0
                 states_is_pc_mr = {
-                    'A': {'pi_lagged': 1.0},
-                    'B': {'pi_lagged': 1.0, 'is_shift': -6.0, 'pc_shift': 3.0}, # Choque misto
-                    'C': {'pi_lagged': 3.0, 'is_shift': 0.0, 'pc_shift': 0} # Resposta Massiva
+                    'A': {'pi_lagged': 1.0, 'y_e': 100.0},
+                    'B': {'y_override': 94.0, 'pi_override': 0.3, 'is_shift': -6.0, 'pc_shift': 6.5}, # Choque misto: IS p/ esquerda, PC p/ cima
+                    'C': {'pi_lagged': 1.0, 'is_shift': 2.0, 'pc_shift': 7.0, 'y_e': 102.0} # Recuperação + Inflação de oferta (6.3% em 2022)
                 }
                 states_ad_bt_eru = {
                     'A': {},
-                    'B': {'ad_shift': -0.5},
-                    'C': {'ad_shift': -0.5, 'eru_shift': 0.3} # Liderança Tecnológica (ERU p/ cima)
+                    'B': {'ad_shift': 1.2, 'bt_shift': -0.4, 'eru_shift': -0.3}, # AD p/ esquerda (ad_shift > 0), BT melhora (p/ baixo), ERU p/ esquerda
+                    'C': {'ad_shift': 0.0, 'bt_shift': -0.8, 'eru_shift': 0.6}  # Digital New Deal: ERU p/ direita, BT ainda melhor (tech)
                 }
             else: # Crise Asiática ou Outros
                 states_is_pc_mr = {

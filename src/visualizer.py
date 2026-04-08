@@ -93,7 +93,7 @@ class MacroVisualizer:
         ax.set_title(f"Coreia do Sul: {title}", fontsize=14, fontweight='bold')
         ax.set_ylabel("Percentual (%)")
         ax.set_xlabel("Ano")
-        ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
+        ax.legend(loc='best')
         self._add_source(ax, f"Fonte: {source}")
         
         if period_label:

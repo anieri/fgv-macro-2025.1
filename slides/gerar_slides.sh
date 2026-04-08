@@ -6,9 +6,9 @@
 echo "Gerando slides..."
 
 # PDF
-npx @marp-team/marp-cli@latest apresentacao_coreia.md -o apresentacao_coreia.pdf
+npx @marp-team/marp-cli@latest apresentacao_coreia.md --allow-local-files -o apresentacao_coreia.pdf
 
 # PPTX
-npx @marp-team/marp-cli@latest apresentacao_coreia.md -o apresentacao_coreia.pptx
+npx @marp-team/marp-cli@latest apresentacao_coreia.md --allow-local-files -o apresentacao_coreia.pptx
 
 echo "Concluído! Arquivos gerados em slides/"
