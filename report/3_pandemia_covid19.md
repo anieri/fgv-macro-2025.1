@@ -35,3 +35,22 @@ A Coreia do Sul emergiu da pandemia não apenas como um país que controlou a sa
 *   `3. Pandemia_evolucao_ISPCMR.png` (Trajetória A → B → C)
 *   `3. Pandemia_monetario.png` (Juros Reais e Reancoragem)
 *   `3. Pandemia_desequilibrios.png` (Salto na Dívida Pública)
+
+# 5. Trabalho
+
+A estratégia coreana (K-Bangyeok) baseou-se em tecnologia e rastreamento massivo, evitando lockdowns totais que paralisassem a indústria pesada. O setor de Serviços sofreu, mas foi compensado pelo salto no valor adicionado industrial (Ind_VA) de alta tecnologia.
+Houve um salto inédito no endividamento público para financiar os pacotes de ajuda emergencial (Korean New Deal).
+O estoque da dívida pública central, que era de 723 trilhões de KRW em 2019, saltou para 846 trilhões em 2020 e atingiu o patamar de 1.126 trilhões em 2023. Pela primeira vez na história moderna, a relação dívida/PIB ultrapassou 50%, gerando debates acalorados sobre a sustentabilidade fiscal.
+Diferente de 2008, o Won foi gerido com maior estabilidade, apoiado por acordos de swap com o Federal Reserve e reservas de US$ 450 bilhões. O câmbio real permaneceu competitivo, impulsionando a balança comercial positiva.
+A confiança do consumidor (CCI) foi severamente testada, mas a gestão eficiente da saúde pública (K-Bangyeok) e a digitalização acelerada da economia permitiram que a Coreia emergisse com ganhos de produtividade devido à maior competitividade tecnológica.
+
+
+A resposta sul-coreana à pandemia de COVID-19 consolidou-se como um estudo de caso em agilidade e precisão macroeconômica ao integrar medidas sanitárias e financeiras de forma coordenada. 
+No campo da saúde, a estratégia de contenção evitou o fechamento total da economia, o que permitiu manter a curva PS relativamente estável e preservou a estrutura de custos e preços do país. Para sustentar o lado da demanda, o governo injetou recursos massivos sob a forma de auxílios emergenciais, deslocando a curva IS de volta para a direita e compensando a retração do consumo privado. Além dessas medidas de curto prazo, foram concedidos créditos fiscais estratégicos para as Chaebols, visando deslocar a curva PS para cima e a ERU para a direita, buscando um fortalecimento estrutural da produtividade.
+No âmbito monetário, o Banco da Coreia adotou uma postura dual, elevando a taxa de juros para 2,0% em 2023 para reancorar as expectativas na Regra Monetária, ao mesmo tempo em que utilizou ferramentas não convencionais para garantir a fluidez do sistema.
+Assim como em 2008, o banco central atuou para que a liquidez chegasse às companhias pelo canal de crédito, especialmente para as pequenas e médias empresas, recorrendo inclusive à compra de títulos públicos. 
+Essa operação configura um modelo que, embora em menor escala que o praticado no Ocidente, foi fundamental para a estabilidade financeira.
+A esfera fiscal foi marcada pela implementação urgente de quatro orçamentos complementares, desenhados para socorrer desde os grupos mais vulneráveis até o setor produtivo. 
+Esse esforço resultou em um aumento planejado do endividamento público e da participação dos gastos governamentais no PIB, mas assegurou que a economia sul-coreana atravessasse a crise com sua estrutura produtiva preservada.
+Falando de política monetária não convencional, o BOK atuou de forma idêntica à de 2008, tentando injetar liquidez no sistema e fazendo com que a liquidez chegue às companhias pelo canal de crédito, especialmente as pequenas e médias empresas. O BOK atuou pela primeira vez na compra de títulos públicos, configurando o mesmo instrumento conhecido como QE, mas em menor escala em relação aos EUA e Europa. 
+O gráfico abaixo ajuda a compreender a magnitude do incentivo fiscal na economia coreana, seja pelo aumento do endividamento público, seja pelo aumento da participação dos gastos do governo no PIB.
