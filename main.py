@@ -218,6 +218,7 @@ def run_analysis():
             
             # Cenários de Evolução customizados por crise
             if "Petroleo" in key:
+                is_pc_mr.pi_T = 2.0
                 states_is_pc_mr = {
                     'A': {'pi_lagged': 2.0},
                     'B': {'pi_lagged': 2.0, 'pc_shift': 8.0}, # Choque de Oferta
@@ -228,16 +229,19 @@ def run_analysis():
                     'B': {'bt_shift': 0.5, 'ad_shift': 0.5}, # Piora na balança comercial
                     'C': {'bt_shift': 0.5, 'ad_shift': 0.5, 'eru_shift': -0.5} # Compressão salarial (ERU para baixo)
                 }
-            elif "2008" in key:
+            elif "Financeira" in key:
+                is_pc_mr.pi_T = 3.0
                 states_is_pc_mr = {
-                    'A': {'pi_lagged': 3.0},
-                    'B': {'pi_lagged': 3.0, 'is_shift': -8.0}, # Queda Exportações
-                    'C': {'pi_lagged': 2.0, 'is_shift': 0.0} # Estímulo Fiscal (volta IS)
+                    'A': {'pi_lagged': 3.0, 'y_e': 100.0, 'pi_T': 3.0},
+                    'B': {'y_override': 96.0, 'pi_override': 3.0 + 1.2*(96.0-100.0), 'is_shift': -8.0, 'y_e': 100.0, 'pi_T': 3.0},
+                    'C': {'pi_lagged': 2.0, 'y_e': 103.0, 'pi_T': 2.0, 'is_shift': 5.0} 
                 }
+
+
                 states_ad_bt_eru = {
                     'A': {},
-                    'B': {'ad_shift': -0.8}, # Queda na demanda global
-                    'C': {'ad_shift': -0.8, 'eru_shift': 0.2} # Melhora competitividade/PS
+                    'B': {'ad_shift': 0.8}, # Choque negativo de demanda (AD p/ esquerda)
+                    'C': {} # Volta à condição inicial (igual a A)
                 }
             elif "Pandemia" in key:
                 states_is_pc_mr = {

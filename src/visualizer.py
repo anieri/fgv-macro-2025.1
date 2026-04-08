@@ -374,9 +374,19 @@ class MacroVisualizer:
         points_pc_mr = {}
         points_is = {}
         for state, params in states.items():
-            y_eq, pi_eq = model.solve_equilibrium_pc_mr(params.get('pi_lagged', model.pi_T), params.get('pc_shift', 0))
+            if 'y_override' in params and 'pi_override' in params:
+                y_eq, pi_eq = params['y_override'], params['pi_override']
+            else:
+                y_eq, pi_eq = model.solve_equilibrium_pc_mr(
+                    params.get('pi_lagged', model.pi_T), 
+                    params.get('pc_shift', 0),
+                    pi_T_override=params.get('pi_T'),
+                    y_e_override=params.get('y_e')
+                )
             points_pc_mr[state] = (y_eq, pi_eq)
-            r_eq = model.r_star + (model.y_e + params.get('is_shift', 0) - y_eq) / model.a
+            
+            y_e = params.get('y_e', model.y_e)
+            r_eq = model.r_star + (y_e + params.get('is_shift', 0) - y_eq) / model.a
             points_is[state] = (y_eq, r_eq)
 
         all_y = [p[0] for p in points_pc_mr.values()] + [model.y_e]
@@ -395,15 +405,28 @@ class MacroVisualizer:
         labels = {'A': 'A: Pré-Crise', 'B': 'B: Choque', 'C': 'C: Resposta'}
 
         # --- Subplot 1: PC-MR ---
-        mr = model.get_mr_curve(y_range)
-        ax1.plot(y_range, mr, color='black', lw=2, linestyle='--')
-        self._label_curve_inside(ax1, y_range, mr, 'MR', 'black', y_lim, pi_lim)
+        mr_groups = self._group_identical_states(states, ['pi_T', 'y_e'])
+        for group in mr_groups:
+            state = group[0]
+            params = states[state]
+            pi_T = params.get('pi_T', model.pi_T)
+            y_e = params.get('y_e', model.y_e)
+            
+            # pi = pi_T - (y - y_e) / (alpha * beta)
+            mr = pi_T - (y_range - y_e) / (model.alpha * model.beta)
+            ax1.plot(y_range, mr, color='black', lw=2, linestyle='--', alpha=0.6 if len(mr_groups) > 1 else 1.0)
+            self._label_curve_inside(ax1, y_range, mr, f'MR ({"&".join(group)})', 'black', y_lim, pi_lim)
         
-        pc_groups = self._group_identical_states(states, ['pi_lagged', 'pc_shift'])
+        pc_groups = self._group_identical_states(states, ['pi_lagged', 'pc_shift', 'y_e'])
         for group in pc_groups:
             state = group[0]
             params = states[state]
-            pc = model.get_pc_curve(y_range, params.get('pi_lagged', model.pi_T), params.get('pc_shift', 0))
+            pc = model.get_pc_curve(
+                y_range, 
+                params.get('pi_lagged', model.pi_T), 
+                params.get('pc_shift', 0),
+                y_e_override=params.get('y_e')
+            )
             ax1.plot(y_range, pc, color=colors[state], lw=1.5, alpha=0.7)
             self._label_curve_inside(ax1, y_range, pc, f"PC ({'&'.join(group)})", colors[state], y_lim, pi_lim)
             for s in group:
@@ -426,11 +449,11 @@ class MacroVisualizer:
         ax1.set_title('Evolução Teórica: Diagrama PC-MR', fontsize=14, fontweight='bold')
 
         # --- Subplot 2: IS ---
-        is_groups = self._group_identical_states(states, ['is_shift'])
+        is_groups = self._group_identical_states(states, ['is_shift', 'y_e'])
         for group in is_groups:
             state = group[0]
             params = states[state]
-            y_is = model.get_is_curve(r_range, params.get('is_shift', 0))
+            y_is = model.get_is_curve(r_range, params.get('is_shift', 0), y_e_override=params.get('y_e'))
             ax2.plot(y_is, r_range, color=colors[state], lw=1.5, alpha=0.7)
             self._label_curve_inside(ax2, y_is, r_range, f"IS ({'&'.join(group)})", colors[state], y_lim, r_lim)
             for s in group:

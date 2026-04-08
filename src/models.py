@@ -15,25 +15,29 @@ class ISPCMR(MacroModel):
         self.beta = beta    # Preferência do Banco Central (MR)
         self.r_star = r_star # Taxa de juros real estabilizadora
 
-    def get_is_curve(self, r_range, is_shift=0):
+    def get_is_curve(self, r_range, is_shift=0, y_e_override=None):
         """Retorna os valores de y para um intervalo de r. y = y_e - a(r - r_star) + shift"""
-        return self.y_e - self.a * (r_range - self.r_star) + is_shift
+        y_e = y_e_override if y_e_override is not None else self.y_e
+        return y_e - self.a * (r_range - self.r_star) + is_shift
 
-    def get_pc_curve(self, y_range, pi_lagged, pc_shift=0):
+    def get_pc_curve(self, y_range, pi_lagged, pc_shift=0, y_e_override=None):
         """Retorna os valores de pi para um intervalo de y, dada pi_e. pi = pi_e + alpha(y - y_e) + shift"""
-        return pi_lagged + self.alpha * (y_range - self.y_e) + pc_shift
+        y_e = y_e_override if y_e_override is not None else self.y_e
+        return pi_lagged + self.alpha * (y_range - y_e) + pc_shift
 
     def get_mr_curve(self, y_range):
         """Retorna os valores de pi para a Regra Monetária (MR). pi = pi_T - (y - y_e) / (alpha * beta)"""
         return self.pi_T - (y_range - self.y_e) / (self.alpha * self.beta)
 
-    def solve_equilibrium_pc_mr(self, pi_lagged, pc_shift=0):
+    def solve_equilibrium_pc_mr(self, pi_lagged, pc_shift=0, pi_T_override=None, y_e_override=None):
         """Encontra o ponto (y, pi) onde PC cruza MR."""
+        pi_T = pi_T_override if pi_T_override is not None else self.pi_T
+        y_e = y_e_override if y_e_override is not None else self.y_e
+        
         # pi_e + alpha(y - y_e) + pc_shift = pi_T - (y - y_e) / (alpha * beta)
-        # (y - y_e) * (alpha + 1/(alpha*beta)) = pi_T - pi_e - pc_shift
         slope_sum = self.alpha + 1 / (self.alpha * self.beta)
-        y_star = self.y_e + (self.pi_T - pi_lagged - pc_shift) / slope_sum
-        pi_star = self.get_mr_curve(y_star)
+        y_star = y_e + (pi_T - pi_lagged - pc_shift) / slope_sum
+        pi_star = pi_T - (y_star - y_e) / (self.alpha * self.beta)
         return y_star, pi_star
 
 class ADBTERU(MacroModel):
